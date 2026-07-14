@@ -357,7 +357,7 @@ text-align: center;
 </div>
 </div>
 
-<!-- ===== HERO - SIN BOTÓN DE MINTEAR ===== -->
+<!-- ===== HERO ===== -->
 <section class="hero" id="heroSection">
 <h1>MINTEA 10 NFT</h1>
 <div class="hero-gratis">GRATIS</div>
@@ -410,71 +410,45 @@ Explora nuestras colecciones y mintea tus NFTs favoritos
 
 <script>
 // ============================================
-// 1. DATOS DE LAS COLECCIONES - ¡AGREGA AQUÍ TUS COLECCIONES!
+// 1. WEB3 - CONEXIÓN DE WALLET
+// ============================================
+var web3, userAccount;
+
+// ============================================
+// 2. DATOS DE LAS COLECCIONES - NEZUKO KAMADO
 // ============================================
 const COLECCIONES = [
 {
 id: 0,
-nombre: "TOKEN FANS",
-descripcion: "Colección principal de personajes mineros. Cada NFT genera FANS pasivamente.",
+nombre: "NEZUKO KAMADO",
+descripcion: "Colección de personajes de Kimetsu no Yaiba. Cada NFT genera FANS pasivamente.",
 imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm",
 badge: "GRATIS",
 badgeClass: "gratis",
-paginaMintear: "https://pre-venta.github.io/INICIO-NFT-MINER-CATALOGO/", // URL de la página de minteo
+paginaMintear: "https://pre-venta.github.io/NFT-NEZUKO-KAMADO/",
 nfts: [
-{ id: 0, nombre: "Personaje 1", imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm", nivel: 0 },
-{ id: 1, nombre: "Personaje 2", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiftffhym7euaqngyarxjiehiyg32mn5ccx7r7vspvhwplbsbk5kjq", nivel: 1 },
-{ id: 2, nombre: "Personaje 3", imagen: "https://gateway.pinata.cloud/ipfs/bafybeianij42732qskxl4zr6wy7odw2hvbpzipubxfo3inq6tfxcov6kwm", nivel: 2 },
-{ id: 3, nombre: "Personaje 4", imagen: "https://gateway.pinata.cloud/ipfs/bafybeibhpv6uqrikll2lfju3gwxpr7r75uontkv42nsizw6j3awwd7idbe", nivel: 3 },
-{ id: 4, nombre: "Personaje 5", imagen: "https://gateway.pinata.cloud/ipfs/bafybeigxsqb37ayscyqt7gspie2lnqablzzgaa2nratkymoaclg3stc4bm", nivel: 4 },
-{ id: 5, nombre: "Personaje 6", imagen: "https://gateway.pinata.cloud/ipfs/bafybeif27ni5euxanedrpvicnrorctds6xoezlju4c3e2gr322wzrmfxsa", nivel: 5 },
-{ id: 6, nombre: "Personaje 7", imagen: "https://gateway.pinata.cloud/ipfs/bafybeih3ze2o7j3nbziq74ffuqphvn54u3zffpox2fgnmnmaounafgbjw4", nivel: 6 },
-{ id: 7, nombre: "Personaje 8", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiddcd2lvklxqxvseqytivhmb6bqbhrmfng3yrn4m4rtlugjgbmqku", nivel: 7 },
-{ id: 8, nombre: "Personaje 9", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiboz3gjvgk7thdb42boic6ualf2m5ni76nhetijrj6un7mzzplkqe", nivel: 8 },
-{ id: 9, nombre: "Personaje 10", imagen: "https://gateway.pinata.cloud/ipfs/bafybeicebvmh74qyxt3y6elpmebx3546reqa6umqcnrqttslzt32s4vhyi", nivel: 9 },
-{ id: 10, nombre: "Personaje 11", imagen: "https://gateway.pinata.cloud/ipfs/bafybeid2cesvyivtcqpgoo3bcy4y3sp6qsf66bohpzt37hahxl2t73dgba", nivel: 10 },
+{ id: 0, nombre: "Nezuko Nivel 0", imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm", nivel: 0 },
+{ id: 1, nombre: "Nezuko Nivel 1", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiftffhym7euaqngyarxjiehiyg32mn5ccx7r7vspvhwplbsbk5kjq", nivel: 1 },
+{ id: 2, nombre: "Nezuko Nivel 2", imagen: "https://gateway.pinata.cloud/ipfs/bafybeianij42732qskxl4zr6wy7odw2hvbpzipubxfo3inq6tfxcov6kwm", nivel: 2 },
+{ id: 3, nombre: "Nezuko Nivel 3", imagen: "https://gateway.pinata.cloud/ipfs/bafybeibhpv6uqrikll2lfju3gwxpr7r75uontkv42nsizw6j3awwd7idbe", nivel: 3 },
+{ id: 4, nombre: "Nezuko Nivel 4", imagen: "https://gateway.pinata.cloud/ipfs/bafybeigxsqb37ayscyqt7gspie2lnqablzzgaa2nratkymoaclg3stc4bm", nivel: 4 },
+{ id: 5, nombre: "Nezuko Nivel 5", imagen: "https://gateway.pinata.cloud/ipfs/bafybeif27ni5euxanedrpvicnrorctds6xoezlju4c3e2gr322wzrmfxsa", nivel: 5 },
+{ id: 6, nombre: "Nezuko Nivel 6", imagen: "https://gateway.pinata.cloud/ipfs/bafybeih3ze2o7j3nbziq74ffuqphvn54u3zffpox2fgnmnmaounafgbjw4", nivel: 6 },
+{ id: 7, nombre: "Nezuko Nivel 7", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiddcd2lvklxqxvseqytivhmb6bqbhrmfng3yrn4m4rtlugjgbmqku", nivel: 7 },
+{ id: 8, nombre: "Nezuko Nivel 8", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiboz3gjvgk7thdb42boic6ualf2m5ni76nhetijrj6un7mzzplkqe", nivel: 8 },
+{ id: 9, nombre: "Nezuko Nivel 9", imagen: "https://gateway.pinata.cloud/ipfs/bafybeicebvmh74qyxt3y6elpmebx3546reqa6umqcnrqttslzt32s4vhyi", nivel: 9 },
+{ id: 10, nombre: "Nezuko Nivel 10", imagen: "https://gateway.pinata.cloud/ipfs/bafybeid2cesvyivtcqpgoo3bcy4y3sp6qsf66bohpzt37hahxl2t73dgba", nivel: 10 },
  ]
-},
-{
-id: 1,
-nombre: "KANAO TSUYURY",
-descripcion: "Colección especial de personajes legendarios con habilidades únicas.",
-imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm",
-badge: "PREMIUM",
-badgeClass: "premium",
-paginaMintear: "https://pre-venta.github.io/NFT-KANAO-TSUYURY/", // URL de la página de minteo
-nfts: [
-{ id: 0, nombre: "Kanao 1", imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm", nivel: 0 },
-{ id: 1, nombre: "Kanao 2", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiftffhym7euaqngyarxjiehiyg32mn5ccx7r7vspvhwplbsbk5kjq", nivel: 1 },
- ]
-},
-// ============================================
-// 🚀 ¡AGREGA MÁS COLECCIONES AQUÍ!
-// Copia este bloque y cambia los datos:
-// ============================================
-// {
-// id: 2,
-// nombre: "NOMBRE DE LA COLECCIÓN",
-// descripcion: "Descripción de la colección",
-// imagen: "URL_DE_LA_IMAGEN_PRINCIPAL",
-// badge: "GRATIS" o "PREMIUM",
-// badgeClass: "gratis" o "premium",
-// paginaMintear: "URL_DE_LA_PAGINA_DE_MINTEO",
-// nfts: [
-// { id: 0, nombre: "NFT 1", imagen: "URL_NFT_1", nivel: 0 },
-// { id: 1, nombre: "NFT 2", imagen: "URL_NFT_2", nivel: 1 },
-// ]
-// },
+}
 ];
 
 // ============================================
-// 2. VARIABLES GLOBALES
+// 3. VARIABLES GLOBALES
 // ============================================
-var web3, userAccount;
 var coleccionActual = null;
 
 // ============================================
-// 3. FUNCIONES DEL CATÁLOGO
+// 4. FUNCIONES DEL CATÁLOGO
 // ============================================
 
 // Renderizar el catálogo de colecciones
@@ -572,20 +546,27 @@ document.getElementById('catalogoView').scrollIntoView({ behavior: 'smooth' });
 }
 
 // ============================================
-// 4. FUNCIONES DE WALLET
+// 5. FUNCIONES DE WALLET (CONECTAR)
 // ============================================
-function abrirModalMovil() { document.getElementById('movilModal').style.display = 'flex'; }
+function abrirModalMovil() {
+if (userAccount) return;
+document.getElementById('movilModal').style.display = 'flex';
+}
 function cerrarModal() { document.getElementById('movilModal').style.display = 'none'; }
 
 function abrirMetaMask() {
-window.location.href = 'https://metamask.app.link/dapp/' + window.location.host + window.location.pathname;
+window.open('https://metamask.app.link/dapp/' + window.location.host + window.location.pathname, '_blank');
 }
 function abrirTrustWallet() {
-window.location.href = 'https://link.trustwallet.com/open_url?coin_id=20000714&url=' + encodeURIComponent(window.location.href);
+window.open('https://link.trustwallet.com/open_url?coin_id=20000714&url=' + encodeURIComponent(window.location.href), '_blank');
 }
 
 async function conectarPC() {
-if (typeof window.ethereum === 'undefined') { alert('Instala MetaMask'); return; }
+if (userAccount) return;
+if (typeof window.ethereum === 'undefined') {
+alert('⚠️ Instala MetaMask para conectar desde PC');
+return;
+}
 try {
 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 userAccount = accounts[0];
@@ -594,11 +575,14 @@ document.getElementById('connectWallet').classList.add('conectado');
 document.getElementById('connectMobile').style.display = 'none';
 document.getElementById('walletAddress').style.display = 'inline';
 document.getElementById('walletAddress').textContent = userAccount.substring(0,6) + '...' + userAccount.substring(38);
-} catch (error) { console.error(error); }
+} catch (error) {
+console.error(error);
+alert('❌ Error al conectar: ' + error.message);
+}
 }
 
 // ============================================
-// 5. INICIALIZACIÓN
+// 6. INICIALIZACIÓN
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
 renderizarCatalogo();

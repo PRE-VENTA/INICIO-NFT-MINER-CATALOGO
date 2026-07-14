@@ -117,16 +117,17 @@ margin: 0.5rem 0 1.5rem 0;
 50% { text-shadow: 0 0 80px rgba(0, 255, 136, 0.7); }
 }
 
-.btn-gold, .btn-bnb, .btn-upgrade, .btn-red, .btn-next-collection, .btn-inicio {
+.btn-gold, .btn-bnb, .btn-upgrade, .btn-red, .btn-next-collection, .btn-inicio, .btn-mintear {
 padding: 15px 30px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer;
 font-size: 1rem; margin: 5px; transition: all 0.3s ease;
 text-transform: uppercase; letter-spacing: 1px;
 }
 .btn-gold { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #0a0a14; border: 2px solid #ffec8b; box-shadow: 0 0 25px rgba(255,215,0,0.4); }
 .btn-bnb { background: linear-gradient(180deg, #f0b90b 0%, #d4a30a 100%); color: #0a0a14; border: 2px solid #ffe484; box-shadow: 0 0 25px rgba(240,185,11,0.4); }
+.btn-mintear { background: linear-gradient(180deg, #00cec9 0%, #008a7a 100%); color: white; border: 2px solid #4dffeb; box-shadow: 0 0 25px rgba(0,206,201,0.4); }
 .btn-next-collection { background: linear-gradient(180deg, #6C5CE7 0%, #5A4BD1 100%); color: white; border: 2px solid #a29bfe; box-shadow: 0 0 25px rgba(108,92,231,0.5); display: inline-block; text-decoration: none; }
 .btn-inicio { background: linear-gradient(180deg, #e67e22 0%, #d35400 100%); color: white; border: 2px solid #f0a860; box-shadow: 0 0 25px rgba(230,126,34,0.4); display: inline-block; text-decoration: none; font-size: 1.1rem; padding: 15px 40px; margin-top: 10px; }
-.btn-gold:hover, .btn-bnb:hover, .btn-upgrade:hover, .btn-red:hover, .btn-next-collection:hover, .btn-inicio:hover { transform: translateY(-3px); filter: brightness(1.2); }
+.btn-gold:hover, .btn-bnb:hover, .btn-upgrade:hover, .btn-red:hover, .btn-next-collection:hover, .btn-inicio:hover, .btn-mintear:hover { transform: translateY(-3px); filter: brightness(1.2); }
 
 /* ===== CATÁLOGO DE COLECCIONES ===== */
 .catalogo-section {
@@ -145,7 +146,7 @@ text-shadow: 0 0 30px rgba(255,215,0,0.3);
 }
 .colecciones-grid {
 display: grid;
-grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 gap: 2rem;
 }
 .coleccion-card {
@@ -189,8 +190,13 @@ border-radius: 20px;
 font-weight: 700;
 font-size: 0.8rem;
 }
-.coleccion-card .badge.gratis { background: #00ff88; }
-.coleccion-card .badge.premium { background: #ff6b6b; }
+.coleccion-card .badge.gratis { background: #00ff88; color: #0a0a14; }
+.coleccion-card .badge.premium { background: #ff6b6b; color: white; }
+.coleccion-card .btn-mintear {
+margin-top: 1rem;
+padding: 10px 25px;
+font-size: 0.9rem;
+}
 
 /* ===== VISTA DE COLECCIÓN INDIVIDUAL ===== */
 .coleccion-detalle {
@@ -249,6 +255,22 @@ margin: 0.5rem 0;
 .nft-card p {
 color: #a0a0c0;
 font-size: 0.8rem;
+}
+.detalle-mintear {
+text-align: center;
+margin-top: 2rem;
+padding: 2rem;
+background: rgba(0, 0, 0, 0.3);
+border-radius: 20px;
+border: 2px solid rgba(212, 175, 55, 0.3);
+}
+.detalle-mintear h3 {
+color: #ffd700;
+margin-bottom: 0.5rem;
+}
+.detalle-mintear p {
+color: #a0a0c0;
+margin-bottom: 1rem;
 }
 
 /* ===== ESTADÍSTICAS ===== */
@@ -335,7 +357,7 @@ text-align: center;
 </div>
 </div>
 
-<!-- ===== HERO ===== -->
+<!-- ===== HERO - SIN BOTÓN DE MINTEAR ===== -->
 <section class="hero" id="heroSection">
 <h1>MINTEA 10 NFT</h1>
 <div class="hero-gratis">GRATIS</div>
@@ -344,7 +366,6 @@ text-align: center;
 Explora nuestras colecciones y mintea tus NFTs favoritos
 </p>
 <div>
-<button class="btn-gold" id="btnMint">🎨 Mintear NFT Gratis</button>
 <button class="btn-bnb" id="btnBuyNav">💰 Comprar FANS</button>
 </div>
 </section>
@@ -372,6 +393,12 @@ Explora nuestras colecciones y mintea tus NFTs favoritos
 <div class="nft-grid" id="nftGrid">
 <!-- Los NFTs se generan con JavaScript -->
 </div>
+<!-- ===== BOTÓN DE MINTEAR DEBAJO DE CADA COLECCIÓN ===== -->
+<div class="detalle-mintear">
+<h3>🎨 ¿Quieres mintear NFTs de esta colección?</h3>
+<p>Conecta tu wallet y comienza a mintear tus NFTs favoritos</p>
+<button class="btn-mintear" id="btnIrAMintear">🚀 Ir a Mintear</button>
+</div>
 </section>
 
 <!-- ===== FOOTER ===== -->
@@ -393,6 +420,7 @@ descripcion: "Colección principal de personajes mineros. Cada NFT genera FANS p
 imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm",
 badge: "GRATIS",
 badgeClass: "gratis",
+paginaMintear: "https://pre-venta.github.io/INICIO-NFT-MINER-CATALOGO/", // URL de la página de minteo
 nfts: [
 { id: 0, nombre: "Personaje 1", imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm", nivel: 0 },
 { id: 1, nombre: "Personaje 2", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiftffhym7euaqngyarxjiehiyg32mn5ccx7r7vspvhwplbsbk5kjq", nivel: 1 },
@@ -414,6 +442,7 @@ descripcion: "Colección especial de personajes legendarios con habilidades úni
 imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm",
 badge: "PREMIUM",
 badgeClass: "premium",
+paginaMintear: "https://pre-venta.github.io/NFT-KANAO-TSUYURY/", // URL de la página de minteo
 nfts: [
 { id: 0, nombre: "Kanao 1", imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm", nivel: 0 },
 { id: 1, nombre: "Kanao 2", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiftffhym7euaqngyarxjiehiyg32mn5ccx7r7vspvhwplbsbk5kjq", nivel: 1 },
@@ -430,10 +459,10 @@ nfts: [
 // imagen: "URL_DE_LA_IMAGEN_PRINCIPAL",
 // badge: "GRATIS" o "PREMIUM",
 // badgeClass: "gratis" o "premium",
+// paginaMintear: "URL_DE_LA_PAGINA_DE_MINTEO",
 // nfts: [
 // { id: 0, nombre: "NFT 1", imagen: "URL_NFT_1", nivel: 0 },
 // { id: 1, nombre: "NFT 2", imagen: "URL_NFT_2", nivel: 1 },
-// // ... más NFTs
 // ]
 // },
 ];
@@ -458,8 +487,21 @@ const card = document.createElement('div');
 card.className = 'coleccion-card';
 card.innerHTML = &lt;img src="${coleccion.imagen}" alt="${coleccion.nombre}" onerror="this.src='https://via.placeholder.com/250x250/1a1a2e/d4af37?text=NFT'"&gt; &lt;h3&gt;${coleccion.nombre}</h3>
 <p>${coleccion.descripcion}&lt;/p&gt; &lt;span class="badge ${coleccion.badgeClass}">${coleccion.badge}&lt;/span&gt; &lt;p style="margin-top:0.5rem;color:#ffd700;"&gt;${coleccion.nfts.length} NFTs</p>
-`;
-card.addEventListener('click', () => verColeccion(coleccion.id));
+<button class="btn-mintear" data-id="${coleccion.id}"&gt;🚀 Mintear&lt;/button&gt;;
+
+// Click en la tarjeta (menos el botón) para ver detalles
+card.addEventListener('click', function(e) {
+if (e.target.tagName === 'BUTTON') return;
+verColeccion(coleccion.id);
+});
+
+// Click en el botón de mintear
+const btnMintear = card.querySelector('.btn-mintear');
+btnMintear.addEventListener('click', function(e) {
+e.stopPropagation();
+irAMintear(coleccion.id);
+});
+
 grid.appendChild(card);
 });
 
@@ -481,7 +523,7 @@ coleccionActual = coleccion;
 document.getElementById('catalogoView').style.display = 'none';
 document.getElementById('coleccionDetalle').classList.add('active');
 
-document.getElementById('coleccionTitulo').textContent = 🖼️${coleccion.nombre}`;
+document.getElementById('coleccionTitulo').textContent = 🖼️ ${coleccion.nombre}`;
 document.getElementById('coleccionDescripcion').textContent = coleccion.descripcion;
 
 const grid = document.getElementById('nftGrid');
@@ -490,13 +532,35 @@ grid.innerHTML = '';
 coleccion.nfts.forEach(nft => {
 const card = document.createElement('div');
 card.className = 'nft-card';
-card.innerHTML = &lt;img src="${nft.imagen}" alt="${nft.nombre}" onerror="this.src='https://via.placeholder.com/180x180/1a1a2e/d4af37?text=NFT'"&gt; &lt;h4&gt;${nft.nombre}</h4>
-<p>⭐ Nivel ${nft.nivel}&lt;/p&gt; &lt;p style="color:#00ff88;"&gt;⚡ ${100 * (nft.nivel + 1)} FANS/día&lt;/p&gt;;
+card.innerHTML = &lt;img src="${nft.imagen}" alt="{nft.nombre}</h4>
+<p>⭐ Nivel latex
+{nft.nivel}&lt;/p&gt; &lt;p style="color:#00ff88;"&gt;⚡ 
+
+{100 * (nft.nivel + 1)} FANS/día</p>
+`;
 grid.appendChild(card);
 });
 
+// Configurar el botón de mintear en el detalle
+const btnIrAMintear = document.getElementById('btnIrAMintear');
+btnIrAMintear.onclick = function() {
+irAMintear(id);
+};
+
 // Scroll al detalle
 document.getElementById('coleccionDetalle').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Ir a la página de minteo de una colección
+function irAMintear(id) {
+const coleccion = COLECCIONES.find(c => c.id === id);
+if (!coleccion) return;
+
+if (coleccion.paginaMintear) {
+window.open(coleccion.paginaMintear, '_blank');
+} else {
+alert('🔧 Esta colección no tiene página de minteo configurada aún.');
+}
 }
 
 // Volver al catálogo
@@ -556,9 +620,6 @@ document.getElementById('logoPrincipal').addEventListener('click', function() {
 if (coleccionActual) volverCatalogo();
 });
 
-document.getElementById('btnMint').addEventListener('click', function() {
-alert('🔧 Función de minteo - Conecta tu wallet y contrato');
-});
 document.getElementById('btnBuyNav').addEventListener('click', function() {
 alert('🔧 Función de compra - Conecta tu wallet y contrato');
 });

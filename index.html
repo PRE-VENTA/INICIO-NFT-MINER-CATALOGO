@@ -3,120 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🏛️ NFT Mining - Catálogo de Colecciones</title>
+<title>🏛️ NFT - Catálogo NEZUKO KAMADO</title>
 <style>
-/* ===== RESET Y FONDO ===== */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
 body {
-font-family: 'Segoe UI', Arial, sans-serif;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 background: #0a0a14;
 color: white;
 min-height: 100vh;
-position: relative;
-}
-body::before {
-content: '';
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: url('https://gateway.pinata.cloud/ipfs/bafybeia42cza6i44lgnlubehfg4pi6frqh7wqtai54xjoyxxzq2xqzlrti') no-repeat center center fixed;
-background-size: cover;
-z-index: -1;
+padding: 20px;
 }
 
-/* ===== HEADER ===== */
-header { background: rgba(26, 26, 46, 0.9); border-bottom: 2px solid #d4af37; padding: 1rem 2rem; position: relative; z-index: 1; backdrop-filter: blur(5px); }
-nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 10px; }
+header {
+background: rgba(26, 26, 46, 0.95);
+border-bottom: 2px solid #d4af37;
+padding: 15px 20px;
+border-radius: 15px;
+margin-bottom: 30px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+gap: 10px;
+}
+
 .logo {
-font-size: 1.8rem; font-weight: 900;
-background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%);
--webkit-background-clip: text; -webkit-text-fill-color: transparent;
+font-size: 1.8rem;
+font-weight: 900;
+background: linear-gradient(180deg, #ffd700, #b8860b);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 cursor: pointer;
 }
-.wallet-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
-#connectWallet, #connectMobile {
-padding: 12px 25px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer;
-font-size: 0.95rem; color: white; transition: all 0.3s ease;
-}
+
 #connectWallet {
-background: linear-gradient(135deg, #4a4a6a 0%, #2a2a4a 100%);
+padding: 12px 25px;
+border: none;
+border-radius: 50px;
+font-weight: 700;
+font-size: 0.95rem;
+cursor: pointer;
+background: linear-gradient(135deg, #4a4a6a, #2a2a4a);
+color: white;
 border: 1px solid #6a6a8a;
-}
-#connectMobile {
-background: linear-gradient(135deg, #1a5a4a 0%, #0a3a2a 100%);
-border: 1px solid #3a8a6a;
-}
-#connectWallet:hover, #connectMobile:hover { transform: translateY(-2px); }
-#connectWallet.conectado {
-background: linear-gradient(135deg, #0a5a3a 0%, #0a3a2a 100%);
-border: 1px solid #3a8a6a;
-}
-#walletAddress {
-background: rgba(20,20,40,0.8); border: 1px solid #d4af37; padding: 8px 15px;
-border-radius: 50px; font-size: 0.9rem; color: #ffd700; font-family: monospace;
+transition: 0.3s;
 }
 
-/* ===== HERO ===== */
+#connectWallet:hover {
+transform: scale(1.05);
+}
+
+#connectWallet.conectado {
+background: linear-gradient(135deg, #0a5a3a, #0a3a2a);
+border: 1px solid #3a8a6a;
+}
+
+#walletAddress {
+background: rgba(20, 20, 40, 0.8);
+border: 1px solid #d4af37;
+padding: 8px 15px;
+border-radius: 50px;
+font-size: 0.9rem;
+color: #ffd700;
+font-family: monospace;
+display: none;
+}
+
 .hero {
-text-align: center; padding: 60px 20px 40px; position: relative; z-index: 1;
-border: 3px solid rgba(0, 0, 0, 0.8); border-radius: 25px;
-background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(3px);
-max-width: 900px; margin: 2rem auto;
+text-align: center;
+padding: 50px 20px;
+border: 3px solid rgba(0, 0, 0, 0.8);
+border-radius: 25px;
+background: rgba(0, 0, 0, 0.4);
+max-width: 900px;
+margin: 0 auto 30px;
 }
+
 .hero h1 {
-font-size: 4.5rem; font-weight: 900;
-background: linear-gradient(180deg, #ffffff 0%, #ffd700 50%, #b8860b 100%);
--webkit-background-clip: text; -webkit-text-fill-color: transparent;
+font-size: 4rem;
+background: linear-gradient(180deg, #ffffff, #ffd700, #b8860b);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
 }
+
 .hero-gratis {
-font-size: 6rem; font-weight: 900; color: #00ff88;
+font-size: 6rem;
+font-weight: 900;
+color: #00ff88;
 text-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
-animation: pulseGlow 2s ease-in-out infinite;
+animation: pulse 2s ease-in-out infinite;
 }
+
 .hero-personaje {
-font-size: 2.5rem; font-weight: 700; color: #ffe066;
-text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+font-size: 2.5rem;
+font-weight: 700;
+color: #ffe066;
 }
-@keyframes pulseGlow {
+
+@keyframes pulse {
 0%, 100% { text-shadow: 0 0 40px rgba(0, 255, 136, 0.3); }
 50% { text-shadow: 0 0 80px rgba(0, 255, 136, 0.7); }
 }
 
-.btn-gold, .btn-bnb, .btn-mintear {
-padding: 15px 30px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer;
-font-size: 1rem; margin: 5px; transition: all 0.3s ease;
-text-transform: uppercase; letter-spacing: 1px;
+.btn-bnb, .btn-mintear {
+padding: 15px 30px;
+border: none;
+border-radius: 50px;
+font-weight: 700;
+cursor: pointer;
+font-size: 1rem;
+margin: 5px;
+transition: 0.3s;
+text-transform: uppercase;
 }
-.btn-gold { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #0a0a14; border: 2px solid #ffec8b; }
-.btn-bnb { background: linear-gradient(180deg, #f0b90b 0%, #d4a30a 100%); color: #0a0a14; border: 2px solid #ffe484; }
-.btn-mintear { background: linear-gradient(180deg, #00cec9 0%, #008a7a 100%); color: white; border: 2px solid #4dffeb; }
-.btn-gold:hover, .btn-bnb:hover, .btn-mintear:hover { transform: translateY(-3px); filter: brightness(1.2); }
 
-/* ===== CATÁLOGO ===== */
-.catalogo-section { max-width: 1200px; margin: 2rem auto; padding: 2rem; position: relative; z-index: 1; }
-.catalogo-section h2 { font-size: 2.5rem; text-align: center; color: #ffd700; margin-bottom: 2rem; }
+.btn-bnb {
+background: linear-gradient(180deg, #f0b90b, #d4a30a);
+color: #0a0a14;
+border: 2px solid #ffe484;
+}
+
+.btn-mintear {
+background: linear-gradient(180deg, #00cec9, #008a7a);
+color: white;
+border: 2px solid #4dffeb;
+}
+
+.btn-bnb:hover, .btn-mintear:hover {
+transform: translateY(-3px);
+filter: brightness(1.2);
+}
+
+.stats {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+gap: 1.5rem;
+max-width: 1200px;
+margin: 0 auto 30px;
+}
+
+.stat-card {
+background: rgba(30, 30, 50, 0.85);
+border: 2px solid #d4af37;
+border-radius: 25px;
+padding: 2rem 1.5rem;
+text-align: center;
+}
+
+.stat-card h3 {
+color: #a0a0c0;
+font-size: 0.85rem;
+text-transform: uppercase;
+}
+
+.stat-card p {
+font-size: 1.8rem;
+font-weight: 900;
+color: #ffd700;
+}
+
+.catalogo-section {
+max-width: 1200px;
+margin: 0 auto 30px;
+}
+
+.catalogo-section h2 {
+font-size: 2.5rem;
+text-align: center;
+color: #ffd700;
+margin-bottom: 2rem;
+}
+
 .colecciones-grid {
 display: grid;
-grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 gap: 2rem;
 }
+
 .coleccion-card {
 background: rgba(30, 30, 50, 0.85);
 border: 2px solid #d4af37;
 border-radius: 20px;
 padding: 1.5rem;
 text-align: center;
-transition: all 0.3s ease;
-backdrop-filter: blur(5px);
+transition: 0.3s;
 cursor: pointer;
 }
+
 .coleccion-card:hover {
 transform: translateY(-10px);
 border-color: #ffd700;
 box-shadow: 0 0 50px rgba(255, 215, 0, 0.3);
 }
+
 .coleccion-card img {
 width: 100%;
 max-width: 250px;
@@ -124,9 +208,18 @@ border-radius: 15px;
 border: 2px solid #d4af37;
 margin-bottom: 1rem;
 }
-.coleccion-card h3 { color: #ffd700; font-size: 1.5rem; }
-.coleccion-card p { color: #a0a0c0; font-size: 0.9rem; }
-.coleccion-card .badge {
+
+.coleccion-card h3 {
+color: #ffd700;
+font-size: 1.5rem;
+}
+
+.coleccion-card p {
+color: #a0a0c0;
+font-size: 0.9rem;
+}
+
+.badge {
 display: inline-block;
 background: #00ff88;
 color: #0a0a14;
@@ -136,81 +229,99 @@ font-weight: 700;
 font-size: 0.8rem;
 }
 
-/* ===== DETALLE ===== */
-.coleccion-detalle { display: none; max-width: 1200px; margin: 2rem auto; padding: 2rem; position: relative; z-index: 1; }
-.coleccion-detalle.active { display: block; }
-.volver-btn {
-background: rgba(255,255,255,0.1); border: 1px solid #d4af37;
-color: #ffd700; padding: 10px 25px; border-radius: 50px;
-cursor: pointer; font-weight: 700; margin-bottom: 2rem;
+.coleccion-detalle {
+display: none;
+max-width: 1200px;
+margin: 0 auto 30px;
 }
+
+.coleccion-detalle.active {
+display: block;
+}
+
+.volver-btn {
+background: rgba(255, 255, 255, 0.1);
+border: 1px solid #d4af37;
+color: #ffd700;
+padding: 10px 25px;
+border-radius: 50px;
+cursor: pointer;
+font-weight: 700;
+margin-bottom: 2rem;
+}
+
 .nft-grid {
 display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 gap: 1.5rem;
 }
+
 .nft-card {
 background: rgba(30, 30, 50, 0.85);
 border: 2px solid #d4af37;
 border-radius: 15px;
 padding: 1rem;
 text-align: center;
-backdrop-filter: blur(5px);
 transition: 0.3s;
 }
-.nft-card:hover { transform: scale(1.05); border-color: #ffd700; }
+
+.nft-card:hover {
+transform: scale(1.05);
+border-color: #ffd700;
+}
+
 .nft-card img {
 width: 100%;
 max-width: 180px;
 border-radius: 10px;
 border: 2px solid #d4af37;
 }
-.nft-card h4 { color: #ffd700; margin: 0.5rem 0; }
-.nft-card p { color: #a0a0c0; font-size: 0.8rem; }
 
-/* ===== ESTADÍSTICAS ===== */
-.stats {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-gap: 1.5rem;
-padding: 2rem;
-max-width: 1200px;
-margin: 0 auto;
-position: relative;
-z-index: 1;
+.nft-card h4 {
+color: #ffd700;
+margin: 0.5rem 0;
 }
-.stat-card {
-background: rgba(30,30,50,0.85);
-border: 2px solid #d4af37;
-border-radius: 25px;
-padding: 2rem 1.5rem;
+
+.nft-card p {
+color: #a0a0c0;
+font-size: 0.8rem;
+}
+
+.detalle-mintear {
 text-align: center;
-backdrop-filter: blur(5px);
+margin-top: 2rem;
+padding: 2rem;
+background: rgba(0, 0, 0, 0.3);
+border-radius: 20px;
+border: 2px solid rgba(212, 175, 55, 0.3);
 }
-.stat-card h3 { color: #a0a0c0; font-size: 0.85rem; text-transform: uppercase; }
-.stat-card p { font-size: 1.8rem; font-weight: 900; color: #ffd700; }
 
-/* ===== MODAL ===== */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; }
-.modal-content { background: linear-gradient(135deg, #2a2a3e, #1a1a2e); border: 2px solid #d4af37; padding: 30px; border-radius: 20px; text-align: center; max-width: 400px; width: 90%; }
-.modal-content h3 { color: #ffd700; margin-bottom: 15px; }
-.modal-content p { color: #a0a0c0; margin-bottom: 15px; }
-.app-btn { padding: 12px 20px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; color: white; width: 100%; margin: 5px 0; }
-.app-btn.metamask { background: linear-gradient(135deg, #4a4a6a 0%, #2a2a4a 100%); border: 1px solid #6a6a8a; }
-.app-btn.trust { background: linear-gradient(135deg, #1a5a4a 0%, #0a3a2a 100%); border: 1px solid #3a8a6a; }
-.btn-cancelar { background: #ff6b6b; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; color: white; width: 100%; margin-top: 5px; }
+.detalle-mintear h3 {
+color: #ffd700;
+}
 
-.info-footer {
-background: rgba(20,20,40,0.85);
+.detalle-mintear p {
+color: #a0a0c0;
+margin-bottom: 1rem;
+}
+
+footer {
+background: rgba(20, 20, 40, 0.85);
 border-top: 2px solid #d4af37;
 padding: 3rem 2rem;
-margin-top: 3rem;
 text-align: center;
-position: relative;
-z-index: 1;
+margin-top: 3rem;
+border-radius: 15px;
 }
-.info-footer h3 { color: #ffd700; font-size: 1.5rem; }
-.info-footer p { color: #a0a0c0; }
+
+footer h3 {
+color: #ffd700;
+font-size: 1.5rem;
+}
+
+footer p {
+color: #a0a0c0;
+}
 
 @media (max-width: 600px) {
 .hero h1 { font-size: 2.5rem; }
@@ -223,36 +334,21 @@ z-index: 1;
 </head>
 <body>
 
+<!-- ===== HEADER ===== -->
 <header>
-<nav>
 <div class="logo" id="logoPrincipal">🏛️ NFT CATÁLOGO</div>
-<div style="display:flex;align-items:center;flex-wrap:wrap;gap:5px;">
-<div class="wallet-buttons">
-<button id="connectWallet">🔌 Conectar</button>
-<button id="connectMobile">📱 Móvil</button>
+<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+<button id="connectWallet">🔌 Conectar Wallet</button>
+<span id="walletAddress"></span>
 </div>
-<span id="walletAddress" style="display:none;"></span>
-</div>
-</nav>
 </header>
-
-<!-- MODAL MÓVIL -->
-<div id="movilModal" class="modal">
-<div class="modal-content">
-<h3>📱 Conectar desde Móvil</h3>
-<p>Elige tu wallet para abrir la app</p>
-<button class="app-btn metamask" id="btnMetaMask">🦊 Abrir en MetaMask</button>
-<button class="app-btn trust" id="btnTrust">🔷 Abrir en Trust Wallet</button>
-<button class="btn-cancelar" id="btnCancelarModal">❌ Cancelar</button>
-</div>
-</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
 <h1>MINTEA 10 NFT</h1>
 <div class="hero-gratis">GRATIS</div>
 <div class="hero-personaje">DE TU PERSONAJE FAVORITO</div>
-<p style="color:#ffffff;font-size:1.2rem;max-width:600px;margin:0 auto 1.5rem;text-shadow:0 0 20px rgba(0,0,0,0.9);">
+<p style="color:#ffffff;font-size:1.2rem;max-width:600px;margin:0 auto 1.5rem;">
 Explora nuestras colecciones y mintea tus NFTs favoritos
 </p>
 <button class="btn-bnb" id="btnBuyNav">💰 Comprar FANS</button>
@@ -277,14 +373,15 @@ Explora nuestras colecciones y mintea tus NFTs favoritos
 <h2 id="coleccionTitulo" style="color:#ffd700;text-align:center;font-size:2.5rem;"></h2>
 <p id="coleccionDescripcion" style="text-align:center;color:#a0a0c0;margin-bottom:2rem;"></p>
 <div class="nft-grid" id="nftGrid"></div>
-<div style="text-align:center;margin-top:2rem;padding:2rem;background:rgba(0,0,0,0.3);border-radius:20px;border:2px solid rgba(212,175,55,0.3);">
-<h3 style="color:#ffd700;">🎨 ¿Quieres mintear NFTs de esta colección?</h3>
-<p style="color:#a0a0c0;margin-bottom:1rem;">Conecta tu wallet y comienza a mintear tus NFTs favoritos</p>
+<div class="detalle-mintear">
+<h3>🎨 ¿Quieres mintear NFTs de esta colección?</h3>
+<p>Conecta tu wallet y comienza a mintear tus NFTs favoritos</p>
 <button class="btn-mintear" id="btnIrAMintear">🚀 Ir a Mintear</button>
 </div>
 </section>
 
-<footer class="info-footer">
+<!-- ===== FOOTER ===== -->
+<footer>
 <h3>📖 COLECCIONES NFT MINERAS</h3>
 <p>Explora, mintea y colecciona NFTs únicos en BNB Smart Chain</p>
 <p style="margin-top:1rem;color:#ffd700;">© 2026 NFT Mining - Todas las colecciones son únicas</p>
@@ -292,10 +389,9 @@ Explora nuestras colecciones y mintea tus NFTs favoritos
 
 <script>
 // ============================================
-// 1. DATOS DE LA COLECCIÓN
+// DATOS DE LA COLECCIÓN - NEZUKO KAMADO
 // ============================================
-const COLECCIONES = [
-{
+const COLECCIONES = [{
 id: 0,
 nombre: "NEZUKO KAMADO",
 descripcion: "Colección de personajes de Kimetsu no Yaiba. Cada NFT genera FANS pasivamente.",
@@ -313,19 +409,18 @@ nfts: [
 { id: 7, nombre: "Nezuko Nivel 7", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiddcd2lvklxqxvseqytivhmb6bqbhrmfng3yrn4m4rtlugjgbmqku", nivel: 7 },
 { id: 8, nombre: "Nezuko Nivel 8", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiboz3gjvgk7thdb42boic6ualf2m5ni76nhetijrj6un7mzzplkqe", nivel: 8 },
 { id: 9, nombre: "Nezuko Nivel 9", imagen: "https://gateway.pinata.cloud/ipfs/bafybeicebvmh74qyxt3y6elpmebx3546reqa6umqcnrqttslzt32s4vhyi", nivel: 9 },
-{ id: 10, nombre: "Nezuko Nivel 10", imagen: "https://gateway.pinata.cloud/ipfs/bafybeid2cesvyivtcqpgoo3bcy4y3sp6qsf66bohpzt37hahxl2t73dgba", nivel: 10 },
+{ id: 10, nombre: "Nezuko Nivel 10", imagen: "https://gateway.pinata.cloud/ipfs/bafybeid2cesvyivtcqpgoo3bcy4y3sp6qsf66bohpzt37hahxl2t73dgba", nivel: 10 }
  ]
-}
-];
+}];
 
 // ============================================
-// 2. VARIABLES
+// VARIABLES
 // ============================================
-var userAccount = null;
-var coleccionActual = null;
+let userAccount = null;
+let coleccionActual = null;
 
 // ============================================
-// 3. FUNCIONES DEL CATÁLOGO
+// RENDERIZAR CATÁLOGO
 // ============================================
 function renderizarCatalogo() {
 const grid = document.getElementById('coleccionesGrid');
@@ -360,6 +455,9 @@ document.getElementById('totalNFTsGlobal').textContent = totalNFTs;
 document.getElementById('minerosActivos').textContent = totalNFTs;
 }
 
+// ============================================
+// VER COLECCIÓN
+// ============================================
 function verColeccion(id) {
 const coleccion = COLECCIONES.find(c => c.id === id);
 if (!coleccion) return;
@@ -390,16 +488,22 @@ irAMintear(id);
 document.getElementById('coleccionDetalle').scrollIntoView({ behavior: 'smooth' });
 }
 
+// ============================================
+// IR A MINTEAR
+// ============================================
 function irAMintear(id) {
 const coleccion = COLECCIONES.find(c => c.id === id);
 if (!coleccion) return;
 if (coleccion.paginaMintear) {
 window.open(coleccion.paginaMintear, '_blank');
 } else {
-alert('🔧 Esta colección no tiene página de minteo configurada aún.');
+alert('Esta colección no tiene página de minteo configurada aún.');
 }
 }
 
+// ============================================
+// VOLVER AL CATÁLOGO
+// ============================================
 function volverCatalogo() {
 document.getElementById('catalogoView').style.display = 'block';
 document.getElementById('coleccionDetalle').classList.remove('active');
@@ -408,77 +512,40 @@ document.getElementById('catalogoView').scrollIntoView({ behavior: 'smooth' });
 }
 
 // ============================================
-// 4. CONEXIÓN DE WALLET (MEJORADA)
+// CONEXIÓN DE WALLET (SIMPLE)
 // ============================================
-function abrirModalMovil() {
-if (userAccount) return;
-document.getElementById('movilModal').style.display = 'flex';
-}
-function cerrarModal() { document.getElementById('movilModal').style.display = 'none'; }
-
-function abrirMetaMask() {
-window.open('https://metamask.app.link/dapp/' + window.location.host + window.location.pathname, '_blank');
-}
-function abrirTrustWallet() {
-window.open('https://link.trustwallet.com/open_url?coin_id=20000714&url=' + encodeURIComponent(window.location.href), '_blank');
-}
-
-async function conectarPC() {
+async function conectarWallet() {
 if (userAccount) {
-alert('✅ Ya estás conectado como: ' + userAccount.substring(0,6) + '...' + userAccount.substring(38));
+alert('✅ Ya estás conectado como: ' + userAccount.substring(0, 6) + '...' + userAccount.substring(38));
 return;
 }
 
-// Detectar si hay wallet instalada
 if (typeof window.ethereum !== 'undefined') {
 try {
-// Solicitar cuentas
 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 userAccount = accounts[0];
-
-// Actualizar UI
 document.getElementById('connectWallet').textContent = '✅ Conectado';
 document.getElementById('connectWallet').classList.add('conectado');
-document.getElementById('connectMobile').style.display = 'none';
 document.getElementById('walletAddress').style.display = 'inline';
-document.getElementById('walletAddress').textContent = userAccount.substring(0,6) + '...' + userAccount.substring(38);
-
+document.getElementById('walletAddress').textContent = userAccount.substring(0, 6) + '...' + userAccount.substring(38);
 console.log('✅ Wallet conectada:', userAccount);
 } catch (error) {
-console.error('❌ Error al conectar:', error);
-if (error.code === 4001) {
-alert('❌ Usuario rechazó la conexión.');
-} else {
+console.error('❌ Error:', error);
 alert('❌ Error al conectar: ' + error.message);
 }
-}
 } else {
-// No hay wallet instalada
-const usarMobile = confirm('⚠️ No se detectó MetaMask en este navegador.\n\n¿Quieres usar la versión móvil con Trust Wallet o MetaMask?');
-if (usarMobile) {
-abrirModalMovil();
-} else {
-alert('📥 Instala MetaMask desde: https://metamask.io/download/');
-}
+alert('⚠️ No se detectó ninguna wallet. Instala MetaMask o usa Trust Wallet.');
 }
 }
 
 // ============================================
-// 5. INICIALIZACIÓN
+// INICIALIZACIÓN
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
 renderizarCatalogo();
 
-document.getElementById('connectWallet').addEventListener('click', conectarPC);
-document.getElementById('connectMobile').addEventListener('click', abrirModalMovil);
-document.getElementById('btnMetaMask').addEventListener('click', abrirMetaMask);
-document.getElementById('btnTrust').addEventListener('click', abrirTrustWallet);
-document.getElementById('btnCancelarModal').addEventListener('click', cerrarModal);
+document.getElementById('connectWallet').addEventListener('click', conectarWallet);
 document.getElementById('volverCatalogo').addEventListener('click', volverCatalogo);
-
-document.getElementById('movilModal').addEventListener('click', function(e) {
-if (e.target === this) cerrarModal();
-});
 
 document.getElementById('logoPrincipal').addEventListener('click', function() {
 if (coleccionActual) volverCatalogo();

@@ -1,21 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; script-src * 'unsafe-inline' 'unsafe-eval'; connect-src *; img-src * data:;">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🏛️ NFT Mining - Catálogo de Colecciones</title>
-<script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js"></script>
 <style>
-:root {
---metal-dark: #1a1a2e;
---metal-gold: #d4af37;
---metal-silver: #c0c0c0;
---metal-bronze: #cd7f32;
---metal-shine: rgba(255,215,0,0.3);
-}
+/* ===== RESET Y FONDO ===== */
 * { margin: 0; padding: 0; box-sizing: border-box; }
-
 body {
 font-family: 'Segoe UI', Arial, sans-serif;
 background: #0a0a14;
@@ -23,8 +14,6 @@ color: white;
 min-height: 100vh;
 position: relative;
 }
-
-/* FONDO DESDE IPFS */
 body::before {
 content: '';
 position: fixed;
@@ -37,113 +26,77 @@ background-size: cover;
 z-index: -1;
 }
 
+/* ===== HEADER ===== */
 header { background: rgba(26, 26, 46, 0.9); border-bottom: 2px solid #d4af37; padding: 1rem 2rem; position: relative; z-index: 1; backdrop-filter: blur(5px); }
 nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 10px; }
 .logo {
 font-size: 1.8rem; font-weight: 900;
 background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%);
 -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-text-shadow: 0 0 15px rgba(255,215,0,0.5);
 cursor: pointer;
 }
-.logo:hover { transform: scale(1.05); transition: 0.3s; }
-
 .wallet-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
 #connectWallet, #connectMobile {
 padding: 12px 25px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer;
-font-size: 0.95rem; color: white; letter-spacing: 0.5px;
-transition: all 0.3s ease;
+font-size: 0.95rem; color: white; transition: all 0.3s ease;
 }
 #connectWallet {
 background: linear-gradient(135deg, #4a4a6a 0%, #2a2a4a 100%);
-border: 1px solid #6a6a8a; box-shadow: 0 0 15px rgba(100,100,180,0.3);
+border: 1px solid #6a6a8a;
 }
 #connectMobile {
 background: linear-gradient(135deg, #1a5a4a 0%, #0a3a2a 100%);
-border: 1px solid #3a8a6a; box-shadow: 0 0 15px rgba(0,200,150,0.3);
+border: 1px solid #3a8a6a;
 }
 #connectWallet:hover, #connectMobile:hover { transform: translateY(-2px); }
-#connectWallet.conectado, #connectMobile.conectado {
+#connectWallet.conectado {
 background: linear-gradient(135deg, #0a5a3a 0%, #0a3a2a 100%);
-border: 1px solid #3a8a6a; box-shadow: 0 0 15px rgba(0,255,150,0.3);
+border: 1px solid #3a8a6a;
 }
 #walletAddress {
 background: rgba(20,20,40,0.8); border: 1px solid #d4af37; padding: 8px 15px;
 border-radius: 50px; font-size: 0.9rem; color: #ffd700; font-family: monospace;
-margin-left: 10px; box-shadow: 0 0 10px rgba(212,175,55,0.2);
 }
 
-/* ===== SECCIÓN HERO ===== */
+/* ===== HERO ===== */
 .hero {
-text-align: center;
-padding: 60px 20px 40px;
-position: relative;
-z-index: 1;
-border: 3px solid rgba(0, 0, 0, 0.8);
-border-radius: 25px;
-background: rgba(0, 0, 0, 0.3);
-backdrop-filter: blur(3px);
-max-width: 900px;
-margin: 2rem auto;
-box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
+text-align: center; padding: 60px 20px 40px; position: relative; z-index: 1;
+border: 3px solid rgba(0, 0, 0, 0.8); border-radius: 25px;
+background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(3px);
+max-width: 900px; margin: 2rem auto;
 }
 .hero h1 {
-font-size: 4.5rem;
-font-weight: 900;
+font-size: 4.5rem; font-weight: 900;
 background: linear-gradient(180deg, #ffffff 0%, #ffd700 50%, #b8860b 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-text-shadow: 0 0 40px rgba(255,215,0,0.4);
-margin-bottom: 0.5rem;
+-webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 .hero-gratis {
-font-size: 6rem;
-font-weight: 900;
-color: #00ff88;
+font-size: 6rem; font-weight: 900; color: #00ff88;
 text-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
-line-height: 1;
-margin: 0.3rem 0;
 animation: pulseGlow 2s ease-in-out infinite;
 }
 .hero-personaje {
-font-size: 2.5rem;
-font-weight: 700;
-color: #ffe066;
+font-size: 2.5rem; font-weight: 700; color: #ffe066;
 text-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
-margin: 0.5rem 0 1.5rem 0;
 }
 @keyframes pulseGlow {
 0%, 100% { text-shadow: 0 0 40px rgba(0, 255, 136, 0.3); }
 50% { text-shadow: 0 0 80px rgba(0, 255, 136, 0.7); }
 }
 
-.btn-gold, .btn-bnb, .btn-upgrade, .btn-red, .btn-next-collection, .btn-inicio, .btn-mintear {
+.btn-gold, .btn-bnb, .btn-mintear {
 padding: 15px 30px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer;
 font-size: 1rem; margin: 5px; transition: all 0.3s ease;
 text-transform: uppercase; letter-spacing: 1px;
 }
-.btn-gold { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #0a0a14; border: 2px solid #ffec8b; box-shadow: 0 0 25px rgba(255,215,0,0.4); }
-.btn-bnb { background: linear-gradient(180deg, #f0b90b 0%, #d4a30a 100%); color: #0a0a14; border: 2px solid #ffe484; box-shadow: 0 0 25px rgba(240,185,11,0.4); }
-.btn-mintear { background: linear-gradient(180deg, #00cec9 0%, #008a7a 100%); color: white; border: 2px solid #4dffeb; box-shadow: 0 0 25px rgba(0,206,201,0.4); }
-.btn-next-collection { background: linear-gradient(180deg, #6C5CE7 0%, #5A4BD1 100%); color: white; border: 2px solid #a29bfe; box-shadow: 0 0 25px rgba(108,92,231,0.5); display: inline-block; text-decoration: none; }
-.btn-inicio { background: linear-gradient(180deg, #e67e22 0%, #d35400 100%); color: white; border: 2px solid #f0a860; box-shadow: 0 0 25px rgba(230,126,34,0.4); display: inline-block; text-decoration: none; font-size: 1.1rem; padding: 15px 40px; margin-top: 10px; }
-.btn-gold:hover, .btn-bnb:hover, .btn-upgrade:hover, .btn-red:hover, .btn-next-collection:hover, .btn-inicio:hover, .btn-mintear:hover { transform: translateY(-3px); filter: brightness(1.2); }
+.btn-gold { background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #0a0a14; border: 2px solid #ffec8b; }
+.btn-bnb { background: linear-gradient(180deg, #f0b90b 0%, #d4a30a 100%); color: #0a0a14; border: 2px solid #ffe484; }
+.btn-mintear { background: linear-gradient(180deg, #00cec9 0%, #008a7a 100%); color: white; border: 2px solid #4dffeb; }
+.btn-gold:hover, .btn-bnb:hover, .btn-mintear:hover { transform: translateY(-3px); filter: brightness(1.2); }
 
-/* ===== CATÁLOGO DE COLECCIONES ===== */
-.catalogo-section {
-max-width: 1200px;
-margin: 2rem auto;
-padding: 2rem;
-position: relative;
-z-index: 1;
-}
-.catalogo-section h2 {
-font-size: 2.5rem;
-text-align: center;
-color: #ffd700;
-margin-bottom: 2rem;
-text-shadow: 0 0 30px rgba(255,215,0,0.3);
-}
+/* ===== CATÁLOGO ===== */
+.catalogo-section { max-width: 1200px; margin: 2rem auto; padding: 2rem; position: relative; z-index: 1; }
+.catalogo-section h2 { font-size: 2.5rem; text-align: center; color: #ffd700; margin-bottom: 2rem; }
 .colecciones-grid {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -171,58 +124,25 @@ border-radius: 15px;
 border: 2px solid #d4af37;
 margin-bottom: 1rem;
 }
-.coleccion-card h3 {
-color: #ffd700;
-font-size: 1.5rem;
-margin-bottom: 0.5rem;
-}
-.coleccion-card p {
-color: #a0a0c0;
-font-size: 0.9rem;
-margin-bottom: 0.5rem;
-}
+.coleccion-card h3 { color: #ffd700; font-size: 1.5rem; }
+.coleccion-card p { color: #a0a0c0; font-size: 0.9rem; }
 .coleccion-card .badge {
 display: inline-block;
-background: #d4af37;
+background: #00ff88;
 color: #0a0a14;
 padding: 5px 15px;
 border-radius: 20px;
 font-weight: 700;
 font-size: 0.8rem;
 }
-.coleccion-card .badge.gratis { background: #00ff88; color: #0a0a14; }
-.coleccion-card .badge.premium { background: #ff6b6b; color: white; }
-.coleccion-card .btn-mintear {
-margin-top: 1rem;
-padding: 10px 25px;
-font-size: 0.9rem;
-}
 
-/* ===== VISTA DE COLECCIÓN INDIVIDUAL ===== */
-.coleccion-detalle {
-display: none;
-max-width: 1200px;
-margin: 2rem auto;
-padding: 2rem;
-position: relative;
-z-index: 1;
-}
-.coleccion-detalle.active {
-display: block;
-}
+/* ===== DETALLE ===== */
+.coleccion-detalle { display: none; max-width: 1200px; margin: 2rem auto; padding: 2rem; position: relative; z-index: 1; }
+.coleccion-detalle.active { display: block; }
 .volver-btn {
-background: rgba(255,255,255,0.1);
-border: 1px solid #d4af37;
-color: #ffd700;
-padding: 10px 25px;
-border-radius: 50px;
-cursor: pointer;
-font-weight: 700;
-margin-bottom: 2rem;
-transition: 0.3s;
-}
-.volver-btn:hover {
-background: rgba(255,215,0,0.2);
+background: rgba(255,255,255,0.1); border: 1px solid #d4af37;
+color: #ffd700; padding: 10px 25px; border-radius: 50px;
+cursor: pointer; font-weight: 700; margin-bottom: 2rem;
 }
 .nft-grid {
 display: grid;
@@ -238,40 +158,15 @@ text-align: center;
 backdrop-filter: blur(5px);
 transition: 0.3s;
 }
-.nft-card:hover {
-transform: scale(1.05);
-border-color: #ffd700;
-}
+.nft-card:hover { transform: scale(1.05); border-color: #ffd700; }
 .nft-card img {
 width: 100%;
 max-width: 180px;
 border-radius: 10px;
 border: 2px solid #d4af37;
 }
-.nft-card h4 {
-color: #ffd700;
-margin: 0.5rem 0;
-}
-.nft-card p {
-color: #a0a0c0;
-font-size: 0.8rem;
-}
-.detalle-mintear {
-text-align: center;
-margin-top: 2rem;
-padding: 2rem;
-background: rgba(0, 0, 0, 0.3);
-border-radius: 20px;
-border: 2px solid rgba(212, 175, 55, 0.3);
-}
-.detalle-mintear h3 {
-color: #ffd700;
-margin-bottom: 0.5rem;
-}
-.detalle-mintear p {
-color: #a0a0c0;
-margin-bottom: 1rem;
-}
+.nft-card h4 { color: #ffd700; margin: 0.5rem 0; }
+.nft-card p { color: #a0a0c0; font-size: 0.8rem; }
 
 /* ===== ESTADÍSTICAS ===== */
 .stats {
@@ -291,10 +186,8 @@ border-radius: 25px;
 padding: 2rem 1.5rem;
 text-align: center;
 backdrop-filter: blur(5px);
-transition: 0.3s;
 }
-.stat-card:hover { transform: translateY(-5px); border-color: #ffd700; }
-.stat-card h3 { color: #a0a0c0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; }
+.stat-card h3 { color: #a0a0c0; font-size: 0.85rem; text-transform: uppercase; }
 .stat-card p { font-size: 1.8rem; font-weight: 900; color: #ffd700; }
 
 /* ===== MODAL ===== */
@@ -305,23 +198,20 @@ transition: 0.3s;
 .app-btn { padding: 12px 20px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; color: white; width: 100%; margin: 5px 0; }
 .app-btn.metamask { background: linear-gradient(135deg, #4a4a6a 0%, #2a2a4a 100%); border: 1px solid #6a6a8a; }
 .app-btn.trust { background: linear-gradient(135deg, #1a5a4a 0%, #0a3a2a 100%); border: 1px solid #3a8a6a; }
+.btn-cancelar { background: #ff6b6b; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; color: white; width: 100%; margin-top: 5px; }
 
-/* ===== FOOTER ===== */
 .info-footer {
 background: rgba(20,20,40,0.85);
 border-top: 2px solid #d4af37;
 padding: 3rem 2rem;
 margin-top: 3rem;
-color: #a0a0c0;
-line-height: 1.8;
+text-align: center;
 position: relative;
 z-index: 1;
-backdrop-filter: blur(5px);
-text-align: center;
 }
-.info-footer h3 { color: #ffd700; font-size: 1.5rem; margin-bottom: 1rem; }
+.info-footer h3 { color: #ffd700; font-size: 1.5rem; }
+.info-footer p { color: #a0a0c0; }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
 .hero h1 { font-size: 2.5rem; }
 .hero-gratis { font-size: 3.5rem; }
@@ -353,21 +243,19 @@ text-align: center;
 <p>Elige tu wallet para abrir la app</p>
 <button class="app-btn metamask" id="btnMetaMask">🦊 Abrir en MetaMask</button>
 <button class="app-btn trust" id="btnTrust">🔷 Abrir en Trust Wallet</button>
-<button class="btn-red btn-small" id="btnCancelarModal" style="background:#ff6b6b;border:none;padding:12px 20px;border-radius:10px;font-weight:700;cursor:pointer;color:white;width:100%;margin-top:5px;">❌ Cancelar</button>
+<button class="btn-cancelar" id="btnCancelarModal">❌ Cancelar</button>
 </div>
 </div>
 
 <!-- ===== HERO ===== -->
-<section class="hero" id="heroSection">
+<section class="hero">
 <h1>MINTEA 10 NFT</h1>
 <div class="hero-gratis">GRATIS</div>
 <div class="hero-personaje">DE TU PERSONAJE FAVORITO</div>
 <p style="color:#ffffff;font-size:1.2rem;max-width:600px;margin:0 auto 1.5rem;text-shadow:0 0 20px rgba(0,0,0,0.9);">
 Explora nuestras colecciones y mintea tus NFTs favoritos
 </p>
-<div>
 <button class="btn-bnb" id="btnBuyNav">💰 Comprar FANS</button>
-</div>
 </section>
 
 <!-- ===== ESTADÍSTICAS ===== -->
@@ -377,31 +265,25 @@ Explora nuestras colecciones y mintea tus NFTs favoritos
 <div class="stat-card"><h3>⚡ Mineros Activos</h3><p id="minerosActivos">0</p></div>
 </section>
 
-<!-- ===== CATÁLOGO DE COLECCIONES ===== -->
+<!-- ===== CATÁLOGO ===== -->
 <section class="catalogo-section" id="catalogoView">
 <h2>🏛️ CATÁLOGO DE COLECCIONES</h2>
-<div class="colecciones-grid" id="coleccionesGrid">
-<!-- Las colecciones se generan con JavaScript -->
-</div>
+<div class="colecciones-grid" id="coleccionesGrid"></div>
 </section>
 
-<!-- ===== VISTA DE COLECCIÓN INDIVIDUAL ===== -->
+<!-- ===== DETALLE ===== -->
 <section class="coleccion-detalle" id="coleccionDetalle">
 <button class="volver-btn" id="volverCatalogo">⬅ Volver al Catálogo</button>
-<h2 id="coleccionTitulo" style="color:#ffd700;text-align:center;font-size:2.5rem;margin-bottom:1.5rem;"></h2>
+<h2 id="coleccionTitulo" style="color:#ffd700;text-align:center;font-size:2.5rem;"></h2>
 <p id="coleccionDescripcion" style="text-align:center;color:#a0a0c0;margin-bottom:2rem;"></p>
-<div class="nft-grid" id="nftGrid">
-<!-- Los NFTs se generan con JavaScript -->
-</div>
-<!-- ===== BOTÓN DE MINTEAR DEBAJO DE CADA COLECCIÓN ===== -->
-<div class="detalle-mintear">
-<h3>🎨 ¿Quieres mintear NFTs de esta colección?</h3>
-<p>Conecta tu wallet y comienza a mintear tus NFTs favoritos</p>
+<div class="nft-grid" id="nftGrid"></div>
+<div style="text-align:center;margin-top:2rem;padding:2rem;background:rgba(0,0,0,0.3);border-radius:20px;border:2px solid rgba(212,175,55,0.3);">
+<h3 style="color:#ffd700;">🎨 ¿Quieres mintear NFTs de esta colección?</h3>
+<p style="color:#a0a0c0;margin-bottom:1rem;">Conecta tu wallet y comienza a mintear tus NFTs favoritos</p>
 <button class="btn-mintear" id="btnIrAMintear">🚀 Ir a Mintear</button>
 </div>
 </section>
 
-<!-- ===== FOOTER ===== -->
 <footer class="info-footer">
 <h3>📖 COLECCIONES NFT MINERAS</h3>
 <p>Explora, mintea y colecciona NFTs únicos en BNB Smart Chain</p>
@@ -410,12 +292,7 @@ Explora nuestras colecciones y mintea tus NFTs favoritos
 
 <script>
 // ============================================
-// 1. WEB3 - CONEXIÓN DE WALLET
-// ============================================
-var web3, userAccount;
-
-// ============================================
-// 2. DATOS DE LAS COLECCIONES - NEZUKO KAMADO
+// 1. DATOS DE LA COLECCIÓN
 // ============================================
 const COLECCIONES = [
 {
@@ -424,7 +301,6 @@ nombre: "NEZUKO KAMADO",
 descripcion: "Colección de personajes de Kimetsu no Yaiba. Cada NFT genera FANS pasivamente.",
 imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm",
 badge: "GRATIS",
-badgeClass: "gratis",
 paginaMintear: "https://pre-venta.github.io/NFT-NEZUKO-KAMADO/",
 nfts: [
 { id: 0, nombre: "Nezuko Nivel 0", imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm", nivel: 0 },
@@ -443,15 +319,14 @@ nfts: [
 ];
 
 // ============================================
-// 3. VARIABLES GLOBALES
+// 2. VARIABLES
 // ============================================
+var userAccount = null;
 var coleccionActual = null;
 
 // ============================================
-// 4. FUNCIONES DEL CATÁLOGO
+// 3. FUNCIONES DEL CATÁLOGO
 // ============================================
-
-// Renderizar el catálogo de colecciones
 function renderizarCatalogo() {
 const grid = document.getElementById('coleccionesGrid');
 grid.innerHTML = '';
@@ -460,16 +335,15 @@ COLECCIONES.forEach(coleccion => {
 const card = document.createElement('div');
 card.className = 'coleccion-card';
 card.innerHTML = &lt;img src="${coleccion.imagen}" alt="${coleccion.nombre}" onerror="this.src='https://via.placeholder.com/250x250/1a1a2e/d4af37?text=NFT'"&gt; &lt;h3&gt;${coleccion.nombre}</h3>
-<p>${coleccion.descripcion}&lt;/p&gt; &lt;span class="badge ${coleccion.badgeClass}">${coleccion.badge}&lt;/span&gt; &lt;p style="margin-top:0.5rem;color:#ffd700;"&gt;${coleccion.nfts.length} NFTs</p>
-<button class="btn-mintear" data-id="${coleccion.id}"&gt;🚀 Mintear&lt;/button&gt;;
+<p>${coleccion.descripcion}&lt;/p&gt; &lt;span class="badge"&gt;${coleccion.badge}</span>
+<p style="margin-top:0.5rem;color:#ffd700;">${coleccion.nfts.length} NFTs&lt;/p&gt; &lt;button class="btn-mintear" data-id="${coleccion.id}" style="margin-top:1rem;padding:10px 25px;font-size:0.9rem;">🚀 Mintear</button>
+`;
 
-// Click en la tarjeta (menos el botón) para ver detalles
 card.addEventListener('click', function(e) {
 if (e.target.tagName === 'BUTTON') return;
 verColeccion(coleccion.id);
 });
 
-// Click en el botón de mintear
 const btnMintear = card.querySelector('.btn-mintear');
 btnMintear.addEventListener('click', function(e) {
 e.stopPropagation();
@@ -480,14 +354,12 @@ grid.appendChild(card);
 });
 
 document.getElementById('totalColecciones').textContent = COLECCIONES.length;
-
 let totalNFTs = 0;
 COLECCIONES.forEach(c => totalNFTs += c.nfts.length);
 document.getElementById('totalNFTsGlobal').textContent = totalNFTs;
 document.getElementById('minerosActivos').textContent = totalNFTs;
 }
 
-// Ver una colección específica
 function verColeccion(id) {
 const coleccion = COLECCIONES.find(c => c.id === id);
 if (!coleccion) return;
@@ -497,7 +369,7 @@ coleccionActual = coleccion;
 document.getElementById('catalogoView').style.display = 'none';
 document.getElementById('coleccionDetalle').classList.add('active');
 
-document.getElementById('coleccionTitulo').textContent = 🖼️ ${coleccion.nombre}`;
+document.getElementById('coleccionTitulo').textContent = 🖼️${coleccion.nombre}`;
 document.getElementById('coleccionDescripcion').textContent = coleccion.descripcion;
 
 const grid = document.getElementById('nftGrid');
@@ -506,30 +378,21 @@ grid.innerHTML = '';
 coleccion.nfts.forEach(nft => {
 const card = document.createElement('div');
 card.className = 'nft-card';
-card.innerHTML = &lt;img src="${nft.imagen}" alt="{nft.nombre}</h4>
-<p>⭐ Nivel latex
-{nft.nivel}&lt;/p&gt; &lt;p style="color:#00ff88;"&gt;⚡ 
-
-{100 * (nft.nivel + 1)} FANS/día</p>
-`;
+card.innerHTML = &lt;img src="${nft.imagen}" alt="${nft.nombre}" onerror="this.src='https://via.placeholder.com/180x180/1a1a2e/d4af37?text=NFT'"&gt; &lt;h4&gt;${nft.nombre}</h4>
+<p>⭐ Nivel ${nft.nivel}&lt;/p&gt; &lt;p style="color:#00ff88;"&gt;⚡ ${100 * (nft.nivel + 1)} FANS/día&lt;/p&gt;;
 grid.appendChild(card);
 });
 
-// Configurar el botón de mintear en el detalle
-const btnIrAMintear = document.getElementById('btnIrAMintear');
-btnIrAMintear.onclick = function() {
+document.getElementById('btnIrAMintear').onclick = function() {
 irAMintear(id);
 };
 
-// Scroll al detalle
 document.getElementById('coleccionDetalle').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Ir a la página de minteo de una colección
 function irAMintear(id) {
 const coleccion = COLECCIONES.find(c => c.id === id);
 if (!coleccion) return;
-
 if (coleccion.paginaMintear) {
 window.open(coleccion.paginaMintear, '_blank');
 } else {
@@ -537,7 +400,6 @@ alert('🔧 Esta colección no tiene página de minteo configurada aún.');
 }
 }
 
-// Volver al catálogo
 function volverCatalogo() {
 document.getElementById('catalogoView').style.display = 'block';
 document.getElementById('coleccionDetalle').classList.remove('active');
@@ -546,7 +408,7 @@ document.getElementById('catalogoView').scrollIntoView({ behavior: 'smooth' });
 }
 
 // ============================================
-// 5. FUNCIONES DE WALLET (CONECTAR)
+// 4. CONEXIÓN DE WALLET (MEJORADA)
 // ============================================
 function abrirModalMovil() {
 if (userAccount) return;
@@ -562,27 +424,47 @@ window.open('https://link.trustwallet.com/open_url?coin_id=20000714&url=' + enco
 }
 
 async function conectarPC() {
-if (userAccount) return;
-if (typeof window.ethereum === 'undefined') {
-alert('⚠️ Instala MetaMask para conectar desde PC');
+if (userAccount) {
+alert('✅ Ya estás conectado como: ' + userAccount.substring(0,6) + '...' + userAccount.substring(38));
 return;
 }
+
+// Detectar si hay wallet instalada
+if (typeof window.ethereum !== 'undefined') {
 try {
+// Solicitar cuentas
 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 userAccount = accounts[0];
+
+// Actualizar UI
 document.getElementById('connectWallet').textContent = '✅ Conectado';
 document.getElementById('connectWallet').classList.add('conectado');
 document.getElementById('connectMobile').style.display = 'none';
 document.getElementById('walletAddress').style.display = 'inline';
 document.getElementById('walletAddress').textContent = userAccount.substring(0,6) + '...' + userAccount.substring(38);
+
+console.log('✅ Wallet conectada:', userAccount);
 } catch (error) {
-console.error(error);
+console.error('❌ Error al conectar:', error);
+if (error.code === 4001) {
+alert('❌ Usuario rechazó la conexión.');
+} else {
 alert('❌ Error al conectar: ' + error.message);
+}
+}
+} else {
+// No hay wallet instalada
+const usarMobile = confirm('⚠️ No se detectó MetaMask en este navegador.\n\n¿Quieres usar la versión móvil con Trust Wallet o MetaMask?');
+if (usarMobile) {
+abrirModalMovil();
+} else {
+alert('📥 Instala MetaMask desde: https://metamask.io/download/');
+}
 }
 }
 
 // ============================================
-// 6. INICIALIZACIÓN
+// 5. INICIALIZACIÓN
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
 renderizarCatalogo();
@@ -594,18 +476,16 @@ document.getElementById('btnTrust').addEventListener('click', abrirTrustWallet);
 document.getElementById('btnCancelarModal').addEventListener('click', cerrarModal);
 document.getElementById('volverCatalogo').addEventListener('click', volverCatalogo);
 
-// Cerrar modal con click fuera
 document.getElementById('movilModal').addEventListener('click', function(e) {
 if (e.target === this) cerrarModal();
 });
 
-// Logo vuelve al catálogo
 document.getElementById('logoPrincipal').addEventListener('click', function() {
 if (coleccionActual) volverCatalogo();
 });
 
 document.getElementById('btnBuyNav').addEventListener('click', function() {
-alert('🔧 Función de compra - Conecta tu wallet y contrato');
+alert('🔧 Función de compra - Próximamente');
 });
 });
 </script>

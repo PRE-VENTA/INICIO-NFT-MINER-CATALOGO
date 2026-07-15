@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🏛️ NFT - Catálogo NEZUKO KAMADO</title>
 <style>
+/* ===== RESET ===== */
 * {
 margin: 0;
 padding: 0;
@@ -17,8 +18,24 @@ background: #0a0a14;
 color: white;
 min-height: 100vh;
 padding: 20px;
+position: relative;
 }
 
+/* ===== FONDO IPFS ===== */
+body::before {
+content: '';
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: url('https://gateway.pinata.cloud/ipfs/bafybeia42cza6i44lgnlubehfg4pi6frqh7wqtai54xjoyxxzq2xqzlrti') no-repeat center center fixed;
+background-size: cover;
+z-index: -1;
+opacity: 0.3;
+}
+
+/* ===== HEADER ===== */
 header {
 background: rgba(26, 26, 46, 0.95);
 border-bottom: 2px solid #d4af37;
@@ -30,6 +47,8 @@ justify-content: space-between;
 align-items: center;
 flex-wrap: wrap;
 gap: 10px;
+position: relative;
+z-index: 1;
 }
 
 .logo {
@@ -41,20 +60,37 @@ background: linear-gradient(180deg, #ffd700, #b8860b);
 cursor: pointer;
 }
 
-#connectWallet {
+.wallet-section {
+display: flex;
+align-items: center;
+gap: 10px;
+flex-wrap: wrap;
+}
+
+#connectWallet,
+#connectMobile {
 padding: 12px 25px;
 border: none;
 border-radius: 50px;
 font-weight: 700;
 font-size: 0.95rem;
 cursor: pointer;
-background: linear-gradient(135deg, #4a4a6a, #2a2a4a);
 color: white;
-border: 1px solid #6a6a8a;
 transition: 0.3s;
 }
 
-#connectWallet:hover {
+#connectWallet {
+background: linear-gradient(135deg, #4a4a6a, #2a2a4a);
+border: 1px solid #6a6a8a;
+}
+
+#connectMobile {
+background: linear-gradient(135deg, #1a5a4a, #0a3a2a);
+border: 1px solid #3a8a6a;
+}
+
+#connectWallet:hover,
+#connectMobile:hover {
 transform: scale(1.05);
 }
 
@@ -74,18 +110,104 @@ font-family: monospace;
 display: none;
 }
 
+/* ===== MODAL MÓVIL ===== */
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.85);
+z-index: 9999;
+justify-content: center;
+align-items: center;
+}
+
+.modal.active {
+display: flex;
+}
+
+.modal-content {
+background: linear-gradient(135deg, #2a2a3e, #1a1a2e);
+border: 2px solid #d4af37;
+padding: 30px;
+border-radius: 20px;
+text-align: center;
+max-width: 400px;
+width: 90%;
+box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+}
+
+.modal-content h3 {
+color: #ffd700;
+margin-bottom: 15px;
+}
+
+.modal-content p {
+color: #a0a0c0;
+margin-bottom: 15px;
+}
+
+.app-btn {
+padding: 12px 20px;
+border: none;
+border-radius: 10px;
+font-weight: 700;
+cursor: pointer;
+color: white;
+width: 100%;
+margin: 5px 0;
+transition: 0.3s;
+}
+
+.app-btn:hover {
+transform: scale(1.02);
+}
+
+.app-btn.metamask {
+background: linear-gradient(135deg, #4a4a6a, #2a2a4a);
+border: 1px solid #6a6a8a;
+}
+
+.app-btn.trust {
+background: linear-gradient(135deg, #1a5a4a, #0a3a2a);
+border: 1px solid #3a8a6a;
+}
+
+.btn-cancelar {
+background: #ff6b6b;
+border: none;
+padding: 12px 20px;
+border-radius: 10px;
+font-weight: 700;
+cursor: pointer;
+color: white;
+width: 100%;
+margin-top: 5px;
+transition: 0.3s;
+}
+
+.btn-cancelar:hover {
+transform: scale(1.02);
+}
+
+/* ===== HERO ===== */
 .hero {
 text-align: center;
 padding: 50px 20px;
 border: 3px solid rgba(0, 0, 0, 0.8);
 border-radius: 25px;
-background: rgba(0, 0, 0, 0.4);
+background: rgba(0, 0, 0, 0.5);
 max-width: 900px;
 margin: 0 auto 30px;
+position: relative;
+z-index: 1;
 }
 
 .hero h1 {
 font-size: 4rem;
+font-weight: 900;
 background: linear-gradient(180deg, #ffffff, #ffd700, #b8860b);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
@@ -106,11 +228,25 @@ color: #ffe066;
 }
 
 @keyframes pulse {
-0%, 100% { text-shadow: 0 0 40px rgba(0, 255, 136, 0.3); }
-50% { text-shadow: 0 0 80px rgba(0, 255, 136, 0.7); }
+0%,
+100% {
+text-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
+}
+50% {
+text-shadow: 0 0 80px rgba(0, 255, 136, 0.7);
+}
 }
 
-.btn-bnb, .btn-mintear {
+.hero p {
+color: #ffffff;
+font-size: 1.2rem;
+max-width: 600px;
+margin: 0 auto 1.5rem;
+}
+
+/* ===== BOTONES ===== */
+.btn-bnb,
+.btn-mintear {
 padding: 15px 30px;
 border: none;
 border-radius: 50px;
@@ -134,17 +270,21 @@ color: white;
 border: 2px solid #4dffeb;
 }
 
-.btn-bnb:hover, .btn-mintear:hover {
+.btn-bnb:hover,
+.btn-mintear:hover {
 transform: translateY(-3px);
 filter: brightness(1.2);
 }
 
+/* ===== ESTADÍSTICAS ===== */
 .stats {
 display: grid;
 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 gap: 1.5rem;
 max-width: 1200px;
 margin: 0 auto 30px;
+position: relative;
+z-index: 1;
 }
 
 .stat-card {
@@ -153,6 +293,7 @@ border: 2px solid #d4af37;
 border-radius: 25px;
 padding: 2rem 1.5rem;
 text-align: center;
+backdrop-filter: blur(5px);
 }
 
 .stat-card h3 {
@@ -167,9 +308,12 @@ font-weight: 900;
 color: #ffd700;
 }
 
+/* ===== CATÁLOGO ===== */
 .catalogo-section {
 max-width: 1200px;
 margin: 0 auto 30px;
+position: relative;
+z-index: 1;
 }
 
 .catalogo-section h2 {
@@ -193,6 +337,7 @@ padding: 1.5rem;
 text-align: center;
 transition: 0.3s;
 cursor: pointer;
+backdrop-filter: blur(5px);
 }
 
 .coleccion-card:hover {
@@ -229,10 +374,13 @@ font-weight: 700;
 font-size: 0.8rem;
 }
 
+/* ===== DETALLE ===== */
 .coleccion-detalle {
 display: none;
 max-width: 1200px;
 margin: 0 auto 30px;
+position: relative;
+z-index: 1;
 }
 
 .coleccion-detalle.active {
@@ -248,6 +396,11 @@ border-radius: 50px;
 cursor: pointer;
 font-weight: 700;
 margin-bottom: 2rem;
+transition: 0.3s;
+}
+
+.volver-btn:hover {
+background: rgba(255, 215, 0, 0.2);
 }
 
 .nft-grid {
@@ -263,6 +416,7 @@ border-radius: 15px;
 padding: 1rem;
 text-align: center;
 transition: 0.3s;
+backdrop-filter: blur(5px);
 }
 
 .nft-card:hover {
@@ -305,6 +459,7 @@ color: #a0a0c0;
 margin-bottom: 1rem;
 }
 
+/* ===== FOOTER ===== */
 footer {
 background: rgba(20, 20, 40, 0.85);
 border-top: 2px solid #d4af37;
@@ -312,6 +467,9 @@ padding: 3rem 2rem;
 text-align: center;
 margin-top: 3rem;
 border-radius: 15px;
+position: relative;
+z-index: 1;
+backdrop-filter: blur(5px);
 }
 
 footer h3 {
@@ -323,12 +481,30 @@ footer p {
 color: #a0a0c0;
 }
 
+/* ===== RESPONSIVE ===== */
 @media (max-width: 600px) {
-.hero h1 { font-size: 2.5rem; }
-.hero-gratis { font-size: 3.5rem; }
-.hero-personaje { font-size: 1.5rem; }
-.colecciones-grid { grid-template-columns: 1fr; }
-.nft-grid { grid-template-columns: repeat(2, 1fr); }
+.hero h1 {
+font-size: 2.5rem;
+}
+.hero-gratis {
+font-size: 3.5rem;
+}
+.hero-personaje {
+font-size: 1.5rem;
+}
+.colecciones-grid {
+grid-template-columns: 1fr;
+}
+.nft-grid {
+grid-template-columns: repeat(2, 1fr);
+}
+header {
+flex-direction: column;
+text-align: center;
+}
+.wallet-section {
+justify-content: center;
+}
 }
 </style>
 </head>
@@ -337,28 +513,47 @@ color: #a0a0c0;
 <!-- ===== HEADER ===== -->
 <header>
 <div class="logo" id="logoPrincipal">🏛️ NFT CATÁLOGO</div>
-<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-<button id="connectWallet">🔌 Conectar Wallet</button>
+<div class="wallet-section">
+<button id="connectWallet">🔌 Conectar</button>
+<button id="connectMobile">📱 Móvil</button>
 <span id="walletAddress"></span>
 </div>
 </header>
+
+<!-- ===== MODAL MÓVIL ===== -->
+<div class="modal" id="movilModal">
+<div class="modal-content">
+<h3>📱 Conectar desde Móvil</h3>
+<p>Elige tu wallet para abrir la app</p>
+<button class="app-btn metamask" id="btnMetaMask">🦊 Abrir en MetaMask</button>
+<button class="app-btn trust" id="btnTrust">🔷 Abrir en Trust Wallet</button>
+<button class="btn-cancelar" id="btnCancelarModal">❌ Cancelar</button>
+</div>
+</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
 <h1>MINTEA 10 NFT</h1>
 <div class="hero-gratis">GRATIS</div>
 <div class="hero-personaje">DE TU PERSONAJE FAVORITO</div>
-<p style="color:#ffffff;font-size:1.2rem;max-width:600px;margin:0 auto 1.5rem;">
-Explora nuestras colecciones y mintea tus NFTs favoritos
-</p>
+<p>Explora nuestras colecciones y mintea tus NFTs favoritos</p>
 <button class="btn-bnb" id="btnBuyNav">💰 Comprar FANS</button>
 </section>
 
 <!-- ===== ESTADÍSTICAS ===== -->
 <section class="stats">
-<div class="stat-card"><h3>📚 Colecciones</h3><p id="totalColecciones">0</p></div>
-<div class="stat-card"><h3>🖼️ NFTs Totales</h3><p id="totalNFTsGlobal">0</p></div>
-<div class="stat-card"><h3>⚡ Mineros Activos</h3><p id="minerosActivos">0</p></div>
+<div class="stat-card">
+<h3>📚 Colecciones</h3>
+<p id="totalColecciones">0</p>
+</div>
+<div class="stat-card">
+<h3>🖼️ NFTs Totales</h3>
+<p id="totalNFTsGlobal">0</p>
+</div>
+<div class="stat-card">
+<h3>⚡ Mineros Activos</h3>
+<p id="minerosActivos">0</p>
+</div>
 </section>
 
 <!-- ===== CATÁLOGO ===== -->
@@ -399,17 +594,28 @@ imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpox
 badge: "GRATIS",
 paginaMintear: "https://pre-venta.github.io/NFT-NEZUKO-KAMADO/",
 nfts: [
-{ id: 0, nombre: "Nezuko Nivel 0", imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm", nivel: 0 },
-{ id: 1, nombre: "Nezuko Nivel 1", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiftffhym7euaqngyarxjiehiyg32mn5ccx7r7vspvhwplbsbk5kjq", nivel: 1 },
-{ id: 2, nombre: "Nezuko Nivel 2", imagen: "https://gateway.pinata.cloud/ipfs/bafybeianij42732qskxl4zr6wy7odw2hvbpzipubxfo3inq6tfxcov6kwm", nivel: 2 },
-{ id: 3, nombre: "Nezuko Nivel 3", imagen: "https://gateway.pinata.cloud/ipfs/bafybeibhpv6uqrikll2lfju3gwxpr7r75uontkv42nsizw6j3awwd7idbe", nivel: 3 },
-{ id: 4, nombre: "Nezuko Nivel 4", imagen: "https://gateway.pinata.cloud/ipfs/bafybeigxsqb37ayscyqt7gspie2lnqablzzgaa2nratkymoaclg3stc4bm", nivel: 4 },
-{ id: 5, nombre: "Nezuko Nivel 5", imagen: "https://gateway.pinata.cloud/ipfs/bafybeif27ni5euxanedrpvicnrorctds6xoezlju4c3e2gr322wzrmfxsa", nivel: 5 },
-{ id: 6, nombre: "Nezuko Nivel 6", imagen: "https://gateway.pinata.cloud/ipfs/bafybeih3ze2o7j3nbziq74ffuqphvn54u3zffpox2fgnmnmaounafgbjw4", nivel: 6 },
-{ id: 7, nombre: "Nezuko Nivel 7", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiddcd2lvklxqxvseqytivhmb6bqbhrmfng3yrn4m4rtlugjgbmqku", nivel: 7 },
-{ id: 8, nombre: "Nezuko Nivel 8", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiboz3gjvgk7thdb42boic6ualf2m5ni76nhetijrj6un7mzzplkqe", nivel: 8 },
-{ id: 9, nombre: "Nezuko Nivel 9", imagen: "https://gateway.pinata.cloud/ipfs/bafybeicebvmh74qyxt3y6elpmebx3546reqa6umqcnrqttslzt32s4vhyi", nivel: 9 },
-{ id: 10, nombre: "Nezuko Nivel 10", imagen: "https://gateway.pinata.cloud/ipfs/bafybeid2cesvyivtcqpgoo3bcy4y3sp6qsf66bohpzt37hahxl2t73dgba", nivel: 10 }
+{ id: 0, nombre: "Nezuko Nivel 0", imagen: "https://gateway.pinata.cloud/ipfs/bafybeie4wc62hvw4c2vpxsck32v7ksayrpoxqc3fichzonhpzbtta4vjrm",
+nivel: 0 },
+{ id: 1, nombre: "Nezuko Nivel 1", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiftffhym7euaqngyarxjiehiyg32mn5ccx7r7vspvhwplbsbk5kjq",
+nivel: 1 },
+{ id: 2, nombre: "Nezuko Nivel 2", imagen: "https://gateway.pinata.cloud/ipfs/bafybeianij42732qskxl4zr6wy7odw2hvbpzipubxfo3inq6tfxcov6kwm",
+nivel: 2 },
+{ id: 3, nombre: "Nezuko Nivel 3", imagen: "https://gateway.pinata.cloud/ipfs/bafybeibhpv6uqrikll2lfju3gwxpr7r75uontkv42nsizw6j3awwd7idbe",
+nivel: 3 },
+{ id: 4, nombre: "Nezuko Nivel 4", imagen: "https://gateway.pinata.cloud/ipfs/bafybeigxsqb37ayscyqt7gspie2lnqablzzgaa2nratkymoaclg3stc4bm",
+nivel: 4 },
+{ id: 5, nombre: "Nezuko Nivel 5", imagen: "https://gateway.pinata.cloud/ipfs/bafybeif27ni5euxanedrpvicnrorctds6xoezlju4c3e2gr322wzrmfxsa",
+nivel: 5 },
+{ id: 6, nombre: "Nezuko Nivel 6", imagen: "https://gateway.pinata.cloud/ipfs/bafybeih3ze2o7j3nbziq74ffuqphvn54u3zffpox2fgnmnmaounafgbjw4",
+nivel: 6 },
+{ id: 7, nombre: "Nezuko Nivel 7", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiddcd2lvklxqxvseqytivhmb6bqbhrmfng3yrn4m4rtlugjgbmqku",
+nivel: 7 },
+{ id: 8, nombre: "Nezuko Nivel 8", imagen: "https://gateway.pinata.cloud/ipfs/bafybeiboz3gjvgk7thdb42boic6ualf2m5ni76nhetijrj6un7mzzplkqe",
+nivel: 8 },
+{ id: 9, nombre: "Nezuko Nivel 9", imagen: "https://gateway.pinata.cloud/ipfs/bafybeicebvmh74qyxt3y6elpmebx3546reqa6umqcnrqttslzt32s4vhyi",
+nivel: 9 },
+{ id: 10, nombre: "Nezuko Nivel 10", imagen: "https://gateway.pinata.cloud/ipfs/bafybeid2cesvyivtcqpgoo3bcy4y3sp6qsf66bohpzt37hahxl2t73dgba",
+nivel: 10 }
  ]
 }];
 
@@ -420,7 +626,7 @@ let userAccount = null;
 let coleccionActual = null;
 
 // ============================================
-// RENDERIZAR CATÁLOGO
+// FUNCIONES DEL CATÁLOGO
 // ============================================
 function renderizarCatalogo() {
 const grid = document.getElementById('coleccionesGrid');
@@ -455,9 +661,6 @@ document.getElementById('totalNFTsGlobal').textContent = totalNFTs;
 document.getElementById('minerosActivos').textContent = totalNFTs;
 }
 
-// ============================================
-// VER COLECCIÓN
-// ============================================
 function verColeccion(id) {
 const coleccion = COLECCIONES.find(c => c.id === id);
 if (!coleccion) return;
@@ -488,9 +691,6 @@ irAMintear(id);
 document.getElementById('coleccionDetalle').scrollIntoView({ behavior: 'smooth' });
 }
 
-// ============================================
-// IR A MINTEAR
-// ============================================
 function irAMintear(id) {
 const coleccion = COLECCIONES.find(c => c.id === id);
 if (!coleccion) return;
@@ -501,9 +701,6 @@ alert('Esta colección no tiene página de minteo configurada aún.');
 }
 }
 
-// ============================================
-// VOLVER AL CATÁLOGO
-// ============================================
 function volverCatalogo() {
 document.getElementById('catalogoView').style.display = 'block';
 document.getElementById('coleccionDetalle').classList.remove('active');
@@ -512,7 +709,7 @@ document.getElementById('catalogoView').scrollIntoView({ behavior: 'smooth' });
 }
 
 // ============================================
-// CONEXIÓN DE WALLET (SIMPLE)
+// CONEXIÓN DE WALLET (COMPLETA)
 // ============================================
 async function conectarWallet() {
 if (userAccount) {
@@ -527,15 +724,47 @@ userAccount = accounts[0];
 document.getElementById('connectWallet').textContent = '✅ Conectado';
 document.getElementById('connectWallet').classList.add('conectado');
 document.getElementById('walletAddress').style.display = 'inline';
-document.getElementById('walletAddress').textContent = userAccount.substring(0, 6) + '...' + userAccount.substring(38);
+document.getElementById('walletAddress').textContent = userAccount.substring(0, 6) + '...' + userAccount
+.substring(38);
 console.log('✅ Wallet conectada:', userAccount);
 } catch (error) {
 console.error('❌ Error:', error);
+if (error.code === 4001) {
+alert('❌ Usuario rechazó la conexión.');
+} else {
 alert('❌ Error al conectar: ' + error.message);
 }
-} else {
-alert('⚠️ No se detectó ninguna wallet. Instala MetaMask o usa Trust Wallet.');
 }
+} else {
+// No hay wallet, ofrecer móvil
+const usarMobile = confirm('⚠️ No se detectó MetaMask en este navegador.\n\n¿Quieres usar la versión móvil con Trust Wallet o MetaMask?');
+if (usarMobile) {
+abrirModalMovil();
+} else {
+alert('📥 Instala MetaMask desde: https://metamask.io/download/');
+}
+}
+}
+
+// ============================================
+// FUNCIONES MÓVIL
+// ============================================
+function abrirModalMovil() {
+if (userAccount) return;
+document.getElementById('movilModal').classList.add('active');
+}
+
+function cerrarModal() {
+document.getElementById('movilModal').classList.remove('active');
+}
+
+function abrirMetaMask() {
+window.open('https://metamask.app.link/dapp/' + window.location.host + window.location.pathname, '_blank');
+}
+
+function abrirTrustWallet() {
+window.open('https://link.trustwallet.com/open_url?coin_id=20000714&url=' + encodeURIComponent(window.location
+.href), '_blank');
 }
 
 // ============================================
@@ -545,7 +774,16 @@ document.addEventListener('DOMContentLoaded', function() {
 renderizarCatalogo();
 
 document.getElementById('connectWallet').addEventListener('click', conectarWallet);
+document.getElementById('connectMobile').addEventListener('click', abrirModalMovil);
+document.getElementById('btnMetaMask').addEventListener('click', abrirMetaMask);
+document.getElementById('btnTrust').addEventListener('click', abrirTrustWallet);
+document.getElementById('btnCancelarModal').addEventListener('click', cerrarModal);
 document.getElementById('volverCatalogo').addEventListener('click', volverCatalogo);
+
+// Cerrar modal click fuera
+document.getElementById('movilModal').addEventListener('click', function(e) {
+if (e.target === this) cerrarModal();
+});
 
 document.getElementById('logoPrincipal').addEventListener('click', function() {
 if (coleccionActual) volverCatalogo();

@@ -216,7 +216,7 @@ document.getElementById('connectMobile').style.display = 'none';
 document.getElementById('walletAddress').style.display = 'inline';
 document.getElementById('walletAddress').textContent = userAccount.substring(0, 6) + '...' + userAccount.substring(38);
 await cargarDatos();
-} catch (error) { console.error(error); }
+} catch (error) { console.error(error); alert('Error al conectar: ' + error.message); }
 }
 
 async function cargarDatos() {
@@ -226,7 +226,7 @@ var b = await tokenContract.methods.balanceOf(userAccount).call();
 var s = await tokenContract.methods.symbol().call();
 document.getElementById('tokenBalance').style.display = 'inline';
 document.getElementById('tokenBalance').textContent = '💰 ' + Number(b / Math.pow(10, tokenDecimals)).toLocaleString() + ' ' + s;
-} catch (e) {}
+} catch (e) { console.log('Error balance usuario:', e); }
 try {
 var bp = await tokenContract.methods.balanceOf(CONTRACTS.presale).call();
 document.getElementById('tokensVendidos').textContent = Math.floor(TOTAL_PREVENTA - Number(bp) / Math.pow(10, tokenDecimals)).toLocaleString();
@@ -238,7 +238,7 @@ document.getElementById('poolMineria').textContent = bnFormateado.toLocaleString
 var bnbEquiv = bnFormateado / 50000000;
 document.getElementById('poolMineriaBNB').textContent = '💎 ' + bnbEquiv.toFixed(4) + ' BNB';
 } catch (e) { document.getElementById('poolMineria').textContent = '---'; }
-await cargarFundadorBadge();
+try { await cargarFundadorBadge(); } catch (e) { console.log('Error badge:', e); }
 }
 
 async function cargarFundadorBadge() {
@@ -259,7 +259,12 @@ var imagenURL = '';
 if (tokenURI.startsWith('http')) {
 try { var resp = await fetch(tokenURI); var metadata = await resp.json(); imagenURL = metadata.image || ''; } catch(e) {}
 } else if (tokenURI.startsWith('data:application/json')) {
-try { var jsonStr = atob(tokenURI.split(',')[1]); var metadata = JSON.parse(jsonStr); imagenURL = metadata.image || ''; } catch(e) {}
+try {
+var base64 = tokenURI.split(',')[1];
+var jsonStr = decodeURIComponent(escape(atob(base64)));
+var metadata = JSON.parse(jsonStr);
+imagenURL = metadata.image || '';
+} catch(e) {}
 }
 if (imagenURL) {
 badge.style.display = 'inline-flex';

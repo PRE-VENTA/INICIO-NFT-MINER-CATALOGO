@@ -142,9 +142,9 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <div class="stat-card"><h3>💎 FANS por BNB</h3><p>50,000,000</p></div>
 <div class="stat-card"><h3>🎯 FANS Vendidos</h3><p id="tokensVendidos">---</p></div>
 <div class="stat-card">
-<h3>🏊 Pool de Minería</h3>
-<p id="poolMineria">---</p>
-<p style="font-size:0.9rem;color:#a0a0c0;margin-top:5px;" id="poolMineriaBNB"></p>
+<h3>🏊 Tu Balance</h3>
+<p id="poolMineria">0 FANS</p>
+<p style="font-size:0.9rem;color:#a0a0c0;margin-top:5px;" id="poolMineriaBNB">💎 0.0000 BNB</p>
 </div>
 <div class="stat-card"><h3>🎨 Colecciones</h3><p>4</p></div>
 </section>
@@ -216,18 +216,17 @@ var b = await tokenContract.methods.balanceOf(userAccount).call();
 var s = await tokenContract.methods.symbol().call();
 document.getElementById('tokenBalance').style.display = 'inline';
 document.getElementById('tokenBalance').textContent = '💰 ' + Number(b / Math.pow(10, tokenDecimals)).toLocaleString() + ' ' + s;
-} catch (e) { console.log('Error balance:', e); }
+
+// Actualizar tarjeta "Tu Balance"
+var balanceFormateado = Number(b / Math.pow(10, tokenDecimals));
+document.getElementById('poolMineria').textContent = balanceFormateado.toLocaleString() + ' FANS';
+var bnbEquiv = balanceFormateado / 50000000;
+document.getElementById('poolMineriaBNB').textContent = '💎 ' + bnbEquiv.toFixed(4) + ' BNB';
+} catch (e) { console.log('Error balance usuario:', e); }
 try {
 var bp = await tokenContract.methods.balanceOf(CONTRACTS.presale).call();
 document.getElementById('tokensVendidos').textContent = Math.floor(TOTAL_PREVENTA - Number(bp) / Math.pow(10, tokenDecimals)).toLocaleString();
 } catch (e) { document.getElementById('tokensVendidos').textContent = '---'; }
-try {
-var bn = await tokenContract.methods.balanceOf(CONTRACTS.token).call();
-var bnFormateado = Math.floor(Number(bn) / Math.pow(10, tokenDecimals));
-document.getElementById('poolMineria').textContent = bnFormateado.toLocaleString() + ' FANS';
-var bnbEquiv = bnFormateado / 50000000;
-document.getElementById('poolMineriaBNB').textContent = '💎 ' + bnbEquiv.toFixed(4) + ' BNB';
-} catch (e) { document.getElementById('poolMineria').textContent = '---'; }
 try { await cargarFundadorBadge(); } catch (e) { console.log('Error badge:', e); }
 }
 

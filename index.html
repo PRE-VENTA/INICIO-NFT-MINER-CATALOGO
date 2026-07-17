@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js"></script>
 <style>
 :root { --metal-dark: #1a1a2e; --metal-gold: #d4af37; }
-* { margin: 0; padding: 0; box-sizing: border-box; }
+• { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0a14; color: white; min-height: 100vh; }
 header { background: linear-gradient(180deg, #2a2a3e 0%, #1a1a2e 100%); border-bottom: 2px solid #d4af37; padding: 1rem 2rem; }
 nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 10px; }
@@ -21,17 +21,18 @@ nav { display: flex; justify-content: space-between; align-items: center; max-wi
 #connectWallet.conectado, #connectMobile.conectado { background: linear-gradient(135deg, #0a5a3a 0%, #0a3a2a 100%); border: 1px solid #3a8a6a; box-shadow: 0 0 15px rgba(0,255,150,0.3); }
 #walletAddress { background: rgba(20,20,40,0.8); border: 1px solid #d4af37; padding: 8px 15px; border-radius: 50px; font-size: 0.9rem; color: #ffd700; font-family: monospace; margin-left: 10px; box-shadow: 0 0 10px rgba(212,175,55,0.2); }
 #tokenBalance { background: rgba(20,20,40,0.8); border: 1px solid #d4af37; padding: 8px 15px; border-radius: 50px; font-weight: 700; color: #ffd700; margin-left: 10px; box-shadow: 0 0 10px rgba(212,175,55,0.2); }
-
+.fundador-badge { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,180,0,0.1)); border: 2px solid #d4af37; border-radius: 50px; padding: 5px 15px 5px 5px; margin-left: 10px; box-shadow: 0 0 15px rgba(255,215,0,0.3); animation: shineBadge 2s ease-in-out infinite; vertical-align: middle; }
+.fundador-badge img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid #ffd700; box-shadow: 0 0 10px rgba(255,215,0,0.5); object-fit: cover; }
+.fundador-badge span { color: #ffd700; font-weight: 700; font-size: 0.85rem; text-shadow: 0 0 10px rgba(255,215,0,0.4); }
+@keyframes shineBadge { 0%, 100% { box-shadow: 0 0 15px rgba(255,215,0,0.3); } 50% { box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 0 50px rgba(255,215,0,0.2); } }
 .announcement-bar { background: linear-gradient(90deg, #0d5e2e 0%, #00a651 25%, #00c853 50%, #00a651 75%, #0d5e2e 100%); color: white; font-weight: 700; font-size: 1.1rem; padding: 12px 0; overflow: hidden; white-space: nowrap; border-bottom: 2px solid #00ff88; box-shadow: 0 0 20px rgba(0,255,100,0.4); }
 .announcement-track { display: inline-block; animation: scrollText 25s linear infinite; }
 .announcement-item { display: inline-block; padding: 0 40px; letter-spacing: 0.5px; }
 .announcement-separator { color: #00ff88; font-size: 1.3rem; margin: 0 5px; }
 @keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-
 .hero { text-align: center; padding: 60px 20px 40px; }
 .hero h1 { font-size: 3rem; font-weight: 900; background: linear-gradient(180deg, #ffffff 0%, #ffd700 50%, #b8860b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 30px rgba(255,215,0,0.5); }
 .hero p { color: #a0a0c0; font-size: 1.2rem; max-width: 600px; margin: 0 auto 1rem; }
-
 .catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; padding: 2rem; max-width: 1300px; margin: 0 auto; }
 .coleccion-card { background: linear-gradient(135deg, rgba(30,30,50,0.9) 0%, rgba(20,20,40,0.9) 100%); border: 2px solid #d4af37; border-radius: 25px; padding: 2rem; text-align: center; box-shadow: 0 0 30px rgba(212,175,55,0.15), inset 0 0 30px rgba(212,175,55,0.05); transition: all 0.3s ease; }
 .coleccion-card:hover { transform: translateY(-8px); border-color: #ffd700; box-shadow: 0 0 50px rgba(255,215,0,0.4), inset 0 0 30px rgba(255,215,0,0.1); }
@@ -40,20 +41,17 @@ nav { display: flex; justify-content: space-between; align-items: center; max-wi
 .coleccion-desc { color: #a0a0c0; font-size: 0.9rem; margin-bottom: 1.5rem; }
 .btn-mintear { display: inline-block; padding: 15px 35px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #0a0a14; border: 2px solid #ffec8b; box-shadow: 0 0 25px rgba(255,215,0,0.4), inset 0 0 10px rgba(255,255,255,0.2); transition: all 0.3s ease; }
 .btn-mintear:hover { transform: translateY(-3px); filter: brightness(1.2); box-shadow: 0 0 40px rgba(255,215,0,0.6); }
-
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; padding: 2rem; max-width: 1200px; margin: 0 auto; }
 .stat-card { background: linear-gradient(135deg, rgba(30,30,50,0.9) 0%, rgba(20,20,40,0.9) 100%); border: 2px solid #d4af37; border-radius: 25px; padding: 2rem 1.5rem; text-align: center; box-shadow: 0 0 30px rgba(212,175,55,0.15); transition: all 0.3s ease; }
 .stat-card:hover { transform: translateY(-5px); border-color: #ffd700; box-shadow: 0 0 50px rgba(255,215,0,0.3); }
 .stat-card h3 { color: #a0a0c0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
 .stat-card p { font-size: 1.8rem; font-weight: 900; color: #ffd700; text-shadow: 0 0 15px rgba(212,175,55,0.5); }
-
 .social-section { text-align: center; padding: 2rem; background: linear-gradient(135deg, rgba(20,20,40,0.95), rgba(10,10,20,0.95)); border-top: 2px solid #d4af37; }
 .social-section h3 { color: #ffd700; margin-bottom: 1rem; }
 .social-links { display: flex; justify-content: center; gap: 20px; }
 .social-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
 .social-icon:hover { transform: scale(1.1); }
 .social-icon img { width: 50px; height: 50px; border-radius: 50%; }
-
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center; }
 .modal-content { background: linear-gradient(135deg, #2a2a3e, #1a1a2e); border: 2px solid #d4af37; padding: 30px; border-radius: 20px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 0 40px rgba(212,175,55,0.3); }
 .modal-content h3 { color: #ffd700; margin-bottom: 15px; }
@@ -61,21 +59,16 @@ nav { display: flex; justify-content: space-between; align-items: center; max-wi
 .app-btn { padding: 12px 20px; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; color: white; width: 100%; margin: 5px 0; }
 .app-btn.metamask { background: linear-gradient(135deg, #4a4a6a 0%, #2a2a4a 100%); border: 1px solid #6a6a8a; }
 .app-btn.trust { background: linear-gradient(135deg, #1a5a4a 0%, #0a3a2a 100%); border: 1px solid #3a8a6a; }
-
 .btn-red { padding: 15px 30px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 1rem; margin: 5px; background: linear-gradient(180deg, #ff6b6b 0%, #cc4444 100%); color: white; border: 2px solid #ffaaaa; box-shadow: 0 0 25px rgba(255,107,107,0.4); }
 .btn-small { padding: 8px 15px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
-
 footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px solid #d4af37; color: #a0a0c0; }
-
 .proximamente-card { background: linear-gradient(135deg, rgba(30,30,50,0.9) 0%, rgba(20,20,40,0.9) 100%); border: 2px dashed #d4af37; border-radius: 25px; padding: 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 350px; }
 .proximamente-card h3 { color: #ffd700; font-size: 1.5rem; }
 .proximamente-card p { color: #a0a0c0; }
-
 @media (max-width: 600px) { .hero h1 { font-size: 2rem; } .catalogo { grid-template-columns: 1fr; padding: 1rem; } .announcement-bar { font-size: 0.8rem; } }
 </style>
 </head>
 <body>
-
 <header>
 <nav>
 <div class="logo">⚡ TOKEN FANS</div>
@@ -86,10 +79,10 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 </div>
 <span id="walletAddress" style="display:none;"></span>
 <span id="tokenBalance" style="display:none;">0 FANS</span>
+<span id="fundadorBadge" style="display:none;"></span>
 </div>
 </nav>
 </header>
-
 <!-- BARRA DE ANUNCIOS -->
 <div class="announcement-bar">
 <div class="announcement-track">
@@ -103,7 +96,6 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <span class="announcement-item">🔥 ¡NO TE QUEDES FUERA! MINTA TUS NFTs GRATIS 🔥</span><span class="announcement-separator">│</span>
 </div>
 </div>
-
 <!-- MODAL MÓVIL -->
 <div id="movilModal" class="modal">
 <div class="modal-content">
@@ -114,15 +106,12 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <button class="btn-red btn-small" id="btnCancelarModal">❌ Cancelar</button>
 </div>
 </div>
-
 <section class="hero">
 <h1>🏠 CATÁLOGO DE COLECCIONES NFT</h1>
 <p>Explora nuestras colecciones y elige tu personaje favorito para mintear GRATIS</p>
 </section>
-
 <!-- CATÁLOGO -->
 <div class="catalogo">
-
 <!-- NEZUKO KAMADO -->
 <div class="coleccion-card">
 <img class="coleccion-img" src="https://gateway.pinata.cloud/ipfs/bafybeid2cesvyivtcqpgoo3bcy4y3sp6qsf66bohpzt37hahxl2t73dgba" alt="Nezuko Kamado">
@@ -130,7 +119,6 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <p class="coleccion-desc">Nivel máximo 10 - Minteo GRATIS</p>
 <a href="https://pre-venta.github.io/NFT-NEZUKO-KAMADO/" class="btn-mintear">🎨 Mintear Ahora</a>
 </div>
-
 <!-- KANAO TSUYURI -->
 <div class="coleccion-card">
 <img class="coleccion-img" src="https://gateway.pinata.cloud/ipfs/bafybeih3hknmqtigclabjuvwq6tyavst3bia5fxnzixz7capyxj5is2z2e" alt="Kanao Tsuyuri">
@@ -138,7 +126,6 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <p class="coleccion-desc">Nivel máximo 10 - Minteo GRATIS</p>
 <a href="https://pre-venta.github.io/NFT-KANAO-TSUYURY/" class="btn-mintear">🎨 Mintear Ahora</a>
 </div>
-
 <!-- MITSURI KANROJI -->
 <div class="coleccion-card">
 <img class="coleccion-img" src="https://gateway.pinata.cloud/ipfs/bafybeig3gac4wnsw4qf2qwxep725ivefxjkvozuco7kp7e52ltlmerqeu4" alt="Mitsuri Kanroji">
@@ -146,7 +133,6 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <p class="coleccion-desc">Nivel máximo 10 - Minteo GRATIS</p>
 <a href="https://pre-venta.github.io/NFT-MITSURI-KANROJI/" class="btn-mintear">🎨 Mintear Ahora</a>
 </div>
-
 <!-- LEO MESSI -->
 <div class="coleccion-card">
 <img class="coleccion-img" src="https://gateway.pinata.cloud/ipfs/bafybeidgzatk3yavoycd2jchphehhqpc4rzldafvzrcnmzt4ck2qxbfrcm" alt="Leo Messi">
@@ -154,23 +140,23 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <p class="coleccion-desc">Nivel máximo 10 - Minteo GRATIS</p>
 <a href="https://pre-venta.github.io/LEO-MESSI/" class="btn-mintear">🎨 Mintear Ahora</a>
 </div>
-
 <!-- PRÓXIMA COLECCIÓN -->
 <div class="proximamente-card">
 <h3>❓ Próximamente</h3>
 <p>Nueva colección en desarrollo</p>
 </div>
-
 </div>
-
 <!-- STATS -->
 <section class="stats">
 <div class="stat-card"><h3>💎 FANS por BNB</h3><p>50,000,000</p></div>
 <div class="stat-card"><h3>🎯 FANS Vendidos</h3><p id="tokensVendidos">---</p></div>
-<div class="stat-card"><h3>🏊 Pool de Minería</h3><p id="poolMineria">---</p></div>
+<div class="stat-card">
+<h3>🏊 Pool de Minería</h3>
+<p id="poolMineria">---</p>
+<p style="font-size:0.9rem;color:#a0a0c0;margin-top:5px;" id="poolMineriaBNB"></p>
+</div>
 <div class="stat-card"><h3>🎨 Colecciones</h3><p>4</p></div>
 </section>
-
 <!-- REDES SOCIALES -->
 <div class="social-section">
 <h3>📱 Síguenos en redes</h3>
@@ -180,16 +166,14 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <a href="https://www.instagram.com/supremacyfans?igsh=eGp6dm9pMnc0aTlx&utm_source=ig_contact_invite" target="_blank" class="social-icon"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
 </div>
 </div>
-
 <footer>
 <p>© 2026 Token FANS - BNB Smart Chain | Catálogo Oficial de Colecciones NFT</p>
 </footer>
-
 <script>
 var web3, userAccount, tokenContract, presaleContract;
 var tokenDecimals = 9;
 var TOTAL_PREVENTA = 200000000000;
-
+var FUNDADOR_CONTRACT = '0x752c54ea84260127e839f76455814F6323D373bb';
 var CONTRACTS = {
 token: '0x39c9deff5c68d62a8acb3215b18fff8d0baff349',
 presale: '0x4EF73c3a789AdB4eC53c0f7715A50164A46b0408'
@@ -237,9 +221,53 @@ await cargarDatos();
 
 async function cargarDatos() {
 if (!userAccount) return;
-try { var b = await tokenContract.methods.balanceOf(userAccount).call(); var s = await tokenContract.methods.symbol().call(); document.getElementById('tokenBalance').style.display = 'inline'; document.getElementById('tokenBalance').textContent = '💰 ' + Number(b / Math.pow(10, tokenDecimals)).toLocaleString() + ' ' + s; } catch (e) {}
-try { var bp = await tokenContract.methods.balanceOf(CONTRACTS.presale).call(); document.getElementById('tokensVendidos').textContent = Math.floor(TOTAL_PREVENTA - Number(bp) / Math.pow(10, tokenDecimals)).toLocaleString(); } catch (e) { document.getElementById('tokensVendidos').textContent = '---'; }
-try { var bn = await tokenContract.methods.balanceOf(CONTRACTS.token).call(); document.getElementById('poolMineria').textContent = Math.floor(Number(bn) / Math.pow(10, tokenDecimals)).toLocaleString() + ' FANS'; } catch (e) { document.getElementById('poolMineria').textContent = '---'; }
+try {
+var b = await tokenContract.methods.balanceOf(userAccount).call();
+var s = await tokenContract.methods.symbol().call();
+document.getElementById('tokenBalance').style.display = 'inline';
+document.getElementById('tokenBalance').textContent = '💰 ' + Number(b / Math.pow(10, tokenDecimals)).toLocaleString() + ' ' + s;
+} catch (e) {}
+try {
+var bp = await tokenContract.methods.balanceOf(CONTRACTS.presale).call();
+document.getElementById('tokensVendidos').textContent = Math.floor(TOTAL_PREVENTA - Number(bp) / Math.pow(10, tokenDecimals)).toLocaleString();
+} catch (e) { document.getElementById('tokensVendidos').textContent = '---'; }
+try {
+var bn = await tokenContract.methods.balanceOf(CONTRACTS.token).call();
+var bnFormateado = Math.floor(Number(bn) / Math.pow(10, tokenDecimals));
+document.getElementById('poolMineria').textContent = bnFormateado.toLocaleString() + ' FANS';
+var bnbEquiv = bnFormateado / 50000000;
+document.getElementById('poolMineriaBNB').textContent = '💎 ' + bnbEquiv.toFixed(4) + ' BNB';
+} catch (e) { document.getElementById('poolMineria').textContent = '---'; }
+await cargarFundadorBadge();
+}
+
+async function cargarFundadorBadge() {
+var badge = document.getElementById('fundadorBadge');
+if (!userAccount || !badge) return;
+try {
+var fundadorABI = [
+{"inputs":[{"name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"type":"function"},
+{"inputs":[{"name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"name":"","type":"uint256"}],"type":"function"},
+{"inputs":[{"name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"name":"","type":"string"}],"type":"function"}
+];
+var fundadorContract = new web3.eth.Contract(fundadorABI, FUNDADOR_CONTRACT);
+var balance = await fundadorContract.methods.balanceOf(userAccount).call();
+if (Number(balance) > 0) {
+var tokenId = await fundadorContract.methods.tokenOfOwnerByIndex(userAccount, 0).call();
+var tokenURI = await fundadorContract.methods.tokenURI(Number(tokenId)).call();
+var imagenURL = '';
+if (tokenURI.startsWith('http')) {
+try { var resp = await fetch(tokenURI); var metadata = await resp.json(); imagenURL = metadata.image || ''; } catch(e) {}
+} else if (tokenURI.startsWith('data:application/json')) {
+try { var jsonStr = atob(tokenURI.split(',')[1]); var metadata = JSON.parse(jsonStr); imagenURL = metadata.image || ''; } catch(e) {}
+}
+if (imagenURL) {
+badge.style.display = 'inline-flex';
+badge.className = 'fundador-badge';
+badge.innerHTML = '<img src="' + imagenURL + '" alt="Fundador" onerror="this.style.display='none'"> <span>FUNDADOR #' + tokenId + '</span>';
+} else { badge.style.display = 'none'; }
+} else { badge.style.display = 'none'; }
+} catch(e) { badge.style.display = 'none'; }
 }
 </script>
 </body>

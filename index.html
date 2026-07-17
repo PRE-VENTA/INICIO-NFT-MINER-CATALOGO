@@ -9,8 +9,26 @@
 <style>
 :root { --metal-dark: #1a1a2e; --metal-gold: #d4af37; }
 • { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0a14; color: white; min-height: 100vh; }
-header { background: linear-gradient(180deg, #2a2a3e 0%, #1a1a2e 100%); border-bottom: 2px solid #d4af37; padding: 1rem 2rem; }
+body {
+font-family: 'Segoe UI', Arial, sans-serif;
+background: #0a0a14;
+color: white;
+min-height: 100vh;
+position: relative;
+}
+body::before {
+content: '';
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: url('https://gateway.pinata.cloud/ipfs/bafybeiffz6srkrbf4bgkdk3jzd4zujmkrun2qigebie62x3nx6tmwjwrku') no-repeat center center fixed;
+background-size: cover;
+opacity: 0.15;
+z-index: -1;
+}
+header { background: linear-gradient(180deg, #2a2a3e 0%, #1a1a2e 100%); border-bottom: 2px solid #d4af37; padding: 1rem 2rem; position: relative; z-index: 1; }
 nav { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; flex-wrap: wrap; gap: 10px; }
 .logo { font-size: 1.8rem; font-weight: 900; background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 15px rgba(255,215,0,0.5); }
 .wallet-buttons { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -25,15 +43,15 @@ nav { display: flex; justify-content: space-between; align-items: center; max-wi
 .fundador-badge img { width: 35px; height: 35px; border-radius: 50%; border: 2px solid #ffd700; box-shadow: 0 0 10px rgba(255,215,0,0.5); object-fit: cover; }
 .fundador-badge span { color: #ffd700; font-weight: 700; font-size: 0.85rem; text-shadow: 0 0 10px rgba(255,215,0,0.4); }
 @keyframes shineBadge { 0%, 100% { box-shadow: 0 0 15px rgba(255,215,0,0.3); } 50% { box-shadow: 0 0 30px rgba(255,215,0,0.6), 0 0 50px rgba(255,215,0,0.2); } }
-.announcement-bar { background: linear-gradient(90deg, #0d5e2e 0%, #00a651 25%, #00c853 50%, #00a651 75%, #0d5e2e 100%); color: white; font-weight: 700; font-size: 1.1rem; padding: 12px 0; overflow: hidden; white-space: nowrap; border-bottom: 2px solid #00ff88; box-shadow: 0 0 20px rgba(0,255,100,0.4); }
+.announcement-bar { background: linear-gradient(90deg, #0d5e2e 0%, #00a651 25%, #00c853 50%, #00a651 75%, #0d5e2e 100%); color: white; font-weight: 700; font-size: 1.1rem; padding: 12px 0; overflow: hidden; white-space: nowrap; border-bottom: 2px solid #00ff88; box-shadow: 0 0 20px rgba(0,255,100,0.4); position: relative; z-index: 1; }
 .announcement-track { display: inline-block; animation: scrollText 25s linear infinite; }
 .announcement-item { display: inline-block; padding: 0 40px; letter-spacing: 0.5px; }
 .announcement-separator { color: #00ff88; font-size: 1.3rem; margin: 0 5px; }
 @keyframes scrollText { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-.hero { text-align: center; padding: 60px 20px 40px; }
+.hero { text-align: center; padding: 60px 20px 40px; position: relative; z-index: 1; }
 .hero h1 { font-size: 3rem; font-weight: 900; background: linear-gradient(180deg, #ffffff 0%, #ffd700 50%, #b8860b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 30px rgba(255,215,0,0.5); }
 .hero p { color: #a0a0c0; font-size: 1.2rem; max-width: 600px; margin: 0 auto 1rem; }
-.catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; padding: 2rem; max-width: 1300px; margin: 0 auto; }
+.catalogo { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; padding: 2rem; max-width: 1300px; margin: 0 auto; position: relative; z-index: 1; }
 .coleccion-card { background: linear-gradient(135deg, rgba(30,30,50,0.9) 0%, rgba(20,20,40,0.9) 100%); border: 2px solid #d4af37; border-radius: 25px; padding: 2rem; text-align: center; box-shadow: 0 0 30px rgba(212,175,55,0.15), inset 0 0 30px rgba(212,175,55,0.05); transition: all 0.3s ease; }
 .coleccion-card:hover { transform: translateY(-8px); border-color: #ffd700; box-shadow: 0 0 50px rgba(255,215,0,0.4), inset 0 0 30px rgba(255,215,0,0.1); }
 .coleccion-img { width: 100%; max-width: 250px; border-radius: 20px; border: 3px solid #d4af37; box-shadow: 0 0 30px rgba(212,175,55,0.3); margin-bottom: 1rem; aspect-ratio: 1; object-fit: cover; }
@@ -41,12 +59,12 @@ nav { display: flex; justify-content: space-between; align-items: center; max-wi
 .coleccion-desc { color: #a0a0c0; font-size: 0.9rem; margin-bottom: 1.5rem; }
 .btn-mintear { display: inline-block; padding: 15px 35px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; text-decoration: none; background: linear-gradient(180deg, #ffd700 0%, #b8860b 100%); color: #0a0a14; border: 2px solid #ffec8b; box-shadow: 0 0 25px rgba(255,215,0,0.4), inset 0 0 10px rgba(255,255,255,0.2); transition: all 0.3s ease; }
 .btn-mintear:hover { transform: translateY(-3px); filter: brightness(1.2); box-shadow: 0 0 40px rgba(255,215,0,0.6); }
-.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; padding: 2rem; max-width: 1200px; margin: 0 auto; }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; padding: 2rem; max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
 .stat-card { background: linear-gradient(135deg, rgba(30,30,50,0.9) 0%, rgba(20,20,40,0.9) 100%); border: 2px solid #d4af37; border-radius: 25px; padding: 2rem 1.5rem; text-align: center; box-shadow: 0 0 30px rgba(212,175,55,0.15); transition: all 0.3s ease; }
 .stat-card:hover { transform: translateY(-5px); border-color: #ffd700; box-shadow: 0 0 50px rgba(255,215,0,0.3); }
 .stat-card h3 { color: #a0a0c0; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.5rem; }
 .stat-card p { font-size: 1.8rem; font-weight: 900; color: #ffd700; text-shadow: 0 0 15px rgba(212,175,55,0.5); }
-.social-section { text-align: center; padding: 2rem; background: linear-gradient(135deg, rgba(20,20,40,0.95), rgba(10,10,20,0.95)); border-top: 2px solid #d4af37; }
+.social-section { text-align: center; padding: 2rem; background: linear-gradient(135deg, rgba(20,20,40,0.95), rgba(10,10,20,0.95)); border-top: 2px solid #d4af37; position: relative; z-index: 1; }
 .social-section h3 { color: #ffd700; margin-bottom: 1rem; }
 .social-links { display: flex; justify-content: center; gap: 20px; }
 .social-icon { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
@@ -61,7 +79,7 @@ nav { display: flex; justify-content: space-between; align-items: center; max-wi
 .app-btn.trust { background: linear-gradient(135deg, #1a5a4a 0%, #0a3a2a 100%); border: 1px solid #3a8a6a; }
 .btn-red { padding: 15px 30px; border: none; border-radius: 50px; font-weight: 700; cursor: pointer; font-size: 1rem; margin: 5px; background: linear-gradient(180deg, #ff6b6b 0%, #cc4444 100%); color: white; border: 2px solid #ffaaaa; box-shadow: 0 0 25px rgba(255,107,107,0.4); }
 .btn-small { padding: 8px 15px; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 0.85rem; }
-footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px solid #d4af37; color: #a0a0c0; }
+footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px solid #d4af37; color: #a0a0c0; position: relative; z-index: 1; }
 .proximamente-card { background: linear-gradient(135deg, rgba(30,30,50,0.9) 0%, rgba(20,20,40,0.9) 100%); border: 2px dashed #d4af37; border-radius: 25px; padding: 2rem; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 350px; }
 .proximamente-card h3 { color: #ffd700; font-size: 1.5rem; }
 .proximamente-card p { color: #a0a0c0; }
@@ -217,7 +235,6 @@ var s = await tokenContract.methods.symbol().call();
 document.getElementById('tokenBalance').style.display = 'inline';
 document.getElementById('tokenBalance').textContent = '💰 ' + Number(b / Math.pow(10, tokenDecimals)).toLocaleString() + ' ' + s;
 
-// Actualizar tarjeta "Tu Balance"
 var balanceFormateado = Number(b / Math.pow(10, tokenDecimals));
 document.getElementById('poolMineria').textContent = balanceFormateado.toLocaleString() + ' FANS';
 var bnbEquiv = balanceFormateado / 50000000;

@@ -83,7 +83,6 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 </div>
 </nav>
 </header>
-<!-- BARRA DE ANUNCIOS -->
 <div class="announcement-bar">
 <div class="announcement-track">
 <span class="announcement-item">🚀 LANZAMIENTO OFICIAL DEL TOKEN FANS - 20/12/2026 🚀</span><span class="announcement-separator">│</span>
@@ -96,7 +95,6 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <span class="announcement-item">🔥 ¡NO TE QUEDES FUERA! MINTA TUS NFTs GRATIS 🔥</span><span class="announcement-separator">│</span>
 </div>
 </div>
-<!-- MODAL MÓVIL -->
 <div id="movilModal" class="modal">
 <div class="modal-content">
 <h3>📱 Conectar desde Móvil</h3>
@@ -110,43 +108,36 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 <h1>🏠 CATÁLOGO DE COLECCIONES NFT</h1>
 <p>Explora nuestras colecciones y elige tu personaje favorito para mintear GRATIS</p>
 </section>
-<!-- CATÁLOGO -->
 <div class="catalogo">
-<!-- NEZUKO KAMADO -->
 <div class="coleccion-card">
 <img class="coleccion-img" src="https://gateway.pinata.cloud/ipfs/bafybeid2cesvyivtcqpgoo3bcy4y3sp6qsf66bohpzt37hahxl2t73dgba" alt="Nezuko Kamado">
 <h3 class="coleccion-nombre">🔥 Nezuko Kamado</h3>
 <p class="coleccion-desc">Nivel máximo 10 - Minteo GRATIS</p>
 <a href="https://pre-venta.github.io/NFT-NEZUKO-KAMADO/" class="btn-mintear">🎨 Mintear Ahora</a>
 </div>
-<!-- KANAO TSUYURI -->
 <div class="coleccion-card">
 <img class="coleccion-img" src="https://gateway.pinata.cloud/ipfs/bafybeih3hknmqtigclabjuvwq6tyavst3bia5fxnzixz7capyxj5is2z2e" alt="Kanao Tsuyuri">
 <h3 class="coleccion-nombre">🌸 Kanao Tsuyuri</h3>
 <p class="coleccion-desc">Nivel máximo 10 - Minteo GRATIS</p>
 <a href="https://pre-venta.github.io/NFT-KANAO-TSUYURY/" class="btn-mintear">🎨 Mintear Ahora</a>
 </div>
-<!-- MITSURI KANROJI -->
 <div class="coleccion-card">
 <img class="coleccion-img" src="https://gateway.pinata.cloud/ipfs/bafybeig3gac4wnsw4qf2qwxep725ivefxjkvozuco7kp7e52ltlmerqeu4" alt="Mitsuri Kanroji">
 <h3 class="coleccion-nombre">💖 Mitsuri Kanroji</h3>
 <p class="coleccion-desc">Nivel máximo 10 - Minteo GRATIS</p>
 <a href="https://pre-venta.github.io/NFT-MITSURI-KANROJI/" class="btn-mintear">🎨 Mintear Ahora</a>
 </div>
-<!-- LEO MESSI -->
 <div class="coleccion-card">
 <img class="coleccion-img" src="https://gateway.pinata.cloud/ipfs/bafybeidgzatk3yavoycd2jchphehhqpc4rzldafvzrcnmzt4ck2qxbfrcm" alt="Leo Messi">
 <h3 class="coleccion-nombre">🐐 Leo Messi</h3>
 <p class="coleccion-desc">Nivel máximo 10 - Minteo GRATIS</p>
 <a href="https://pre-venta.github.io/LEO-MESSI/" class="btn-mintear">🎨 Mintear Ahora</a>
 </div>
-<!-- PRÓXIMA COLECCIÓN -->
 <div class="proximamente-card">
 <h3>❓ Próximamente</h3>
 <p>Nueva colección en desarrollo</p>
 </div>
 </div>
-<!-- STATS -->
 <section class="stats">
 <div class="stat-card"><h3>💎 FANS por BNB</h3><p>50,000,000</p></div>
 <div class="stat-card"><h3>🎯 FANS Vendidos</h3><p id="tokensVendidos">---</p></div>
@@ -157,7 +148,6 @@ footer { text-align: center; padding: 2rem; background: #0a0a14; border-top: 2px
 </div>
 <div class="stat-card"><h3>🎨 Colecciones</h3><p>4</p></div>
 </section>
-<!-- REDES SOCIALES -->
 <div class="social-section">
 <h3>📱 Síguenos en redes</h3>
 <div class="social-links">
@@ -226,7 +216,7 @@ var b = await tokenContract.methods.balanceOf(userAccount).call();
 var s = await tokenContract.methods.symbol().call();
 document.getElementById('tokenBalance').style.display = 'inline';
 document.getElementById('tokenBalance').textContent = '💰 ' + Number(b / Math.pow(10, tokenDecimals)).toLocaleString() + ' ' + s;
-} catch (e) { console.log('Error balance usuario:', e); }
+} catch (e) { console.log('Error balance:', e); }
 try {
 var bp = await tokenContract.methods.balanceOf(CONTRACTS.presale).call();
 document.getElementById('tokensVendidos').textContent = Math.floor(TOTAL_PREVENTA - Number(bp) / Math.pow(10, tokenDecimals)).toLocaleString();
@@ -269,7 +259,15 @@ imagenURL = metadata.image || '';
 if (imagenURL) {
 badge.style.display = 'inline-flex';
 badge.className = 'fundador-badge';
-badge.innerHTML = '<img src="' + imagenURL + '" alt="Fundador" onerror="this.style.display='none'"> <span>FUNDADOR #' + tokenId + '</span>';
+var img = document.createElement('img');
+img.src = imagenURL;
+img.alt = 'Fundador';
+img.onerror = function() { this.style.display = 'none'; };
+var span = document.createElement('span');
+span.textContent = 'FUNDADOR #' + tokenId;
+badge.innerHTML = '';
+badge.appendChild(img);
+badge.appendChild(span);
 } else { badge.style.display = 'none'; }
 } else { badge.style.display = 'none'; }
 } catch(e) { badge.style.display = 'none'; }

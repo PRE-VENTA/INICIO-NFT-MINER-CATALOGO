@@ -245,12 +245,12 @@ try {
 var b = await tokenContract.methods.balanceOf(userAccount).call();
 var s = await tokenContract.methods.symbol().call();
 document.getElementById('tokenBalance').style.display = 'inline';
-document.getElementById('tokenBalance').textContent = '💰 ' + Number(b / Math.pow(10, tokenDecimals)).toLocaleString() + ' ' + s;
+document.getElementById('tokenBalance').textContent = ' ' + Number(b / Math.pow(10, tokenDecimals)).toLocaleString() + ' ' + s;
 
 var balanceFormateado = Number(b / Math.pow(10, tokenDecimals));
 document.getElementById('poolMineria').textContent = balanceFormateado.toLocaleString() + ' FANS';
 var bnbEquiv = balanceFormateado / 50000000;
-document.getElementById('poolMineriaBNB').textContent = '💎 ' + bnbEquiv.toFixed(4) + ' BNB';
+document.getElementById('poolMineriaBNB').textContent = ' ' + bnbEquiv.toFixed(4) + ' BNB';
 } catch (e) { console.log('Error balance usuario:', e); }
 try {
 var bp = await tokenContract.methods.balanceOf(CONTRACTS.presale).call();
